@@ -2191,9 +2191,6 @@ hr {
   color: var(--text-color);
   padding: 10px 0;
 }
-.footer-inner {
-  text-align: left;
-}
 @media (max-width: 767px) {
   .footer-inner {
     text-align: center;
