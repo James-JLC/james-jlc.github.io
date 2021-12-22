@@ -20,18 +20,14 @@
     var CONFIG = {"hostname":"jilichao.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1.加载Plugin    程序会将classpath加上plugin.path的配置信息作为插件的加载目录，调用scanPluginPath获取PluginDesc(Connector,Converter,HeaderConverter,Transformation)和ServiceLoaderPluginDesc(ConfigProvider,ConnectRestExtension,Conn">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Kafka connect process">
-<meta property="og:url" content="http://jilichao.github.io/2021/12/01/Kafka-connect-process/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="知秋">
+<meta property="og:url" content="http://jilichao.github.io/tags/Distributed/index.html">
 <meta property="og:site_name" content="知秋">
-<meta property="og:description" content="1.加载Plugin    程序会将classpath加上plugin.path的配置信息作为插件的加载目录，调用scanPluginPath获取PluginDesc(Connector,Converter,HeaderConverter,Transformation)和ServiceLoaderPluginDesc(ConfigProvider,ConnectRestExtension,Conn">
-<meta property="article:published_time" content="2021-11-30T23:52:00.000Z">
-<meta property="article:modified_time" content="2021-12-20T11:21:36.717Z">
 <meta property="article:author" content="ZhiQiu">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://jilichao.github.io/2021/12/01/Kafka-connect-process/">
+<link rel="canonical" href="http://jilichao.github.io/tags/Distributed/">
 
 
 <script id="page-configurations">
@@ -39,12 +35,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-Hans'
   };
 </script>
 
-  <title>Kafka connect process | 知秋</title>
+  <title>标签: Distributed | 知秋</title>
   
 
 
@@ -124,7 +120,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -154,87 +150,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content tag">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/12/01/Kafka-connect-process/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="ZhiQiu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知秋">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Kafka connect process
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-01 07:52:00" itemprop="dateCreated datePublished" datetime="2021-12-01T07:52:00+08:00">2021-12-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-20 19:21:36" itemprop="dateModified" datetime="2021-12-20T19:21:36+08:00">2021-12-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">Distributed
+          <small>标签</small>
+        </h2>
+      </div>
 
       
-        <p>1.加载Plugin<br>    程序会将classpath加上plugin.path的配置信息作为插件的加载目录，调用scanPluginPath获取PluginDesc(Connector,Converter,HeaderConverter,Transformation)和ServiceLoaderPluginDesc(ConfigProvider,ConnectRestExtension,ConnectorClientConfigOverridePolicy)的子类，通过loadJdbcDrivers获取可使用的JDBC驱动。对于classpath和普通目录，加载时使用的classload会稍有区别，普通目录使用的classloader是PluginClassLoader，做了黑白名单过滤。而classpath则使用了默认的java.lang.ClassLoader所所持有的classloader。<br>2.实例化config</p>
-<p>3.Cluster ID<br>4.Rest初始化<br>5.配置offset<br>6.Config policy<br>7.实例化Worker<br>8.配置Status store<br>9.配置Config store<br>10.初始化Herder<br>11.启动Connect</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-12-01T07:52:00+08:00"
+              content="2021-12-01">
+          12-01
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/12/01/Kafka-Distributed-Connect-Start-Process/" itemprop="url">
+            <span itemprop="name">Kafka Distributed Connect启动过程</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/11/17/SpringBoot-application-integrate-with-CAS-client/" rel="prev" title="CAS 学习(二)--SpringBoot整合CAS">
-      <i class="fa fa-chevron-left"></i> CAS 学习(二)--SpringBoot整合CAS
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/12/20/OPCDA-Automation-Interface/" rel="next" title="OPC DA开发常用接口规范介绍-OPCDAAuto自动化接口">
-      OPC DA开发常用接口规范介绍-OPCDAAuto自动化接口 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
@@ -309,7 +269,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

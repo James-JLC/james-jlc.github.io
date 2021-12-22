@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jilichao.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="加载Plugin调用Plugins构造函数初始化Plugins对象 1Plugins plugins &#x3D; new Plugins(workerProps); 在构造函数中会获取plugin.path的配置信息作为插件的加载目录 1234567List&lt;String&gt; pluginLocations &#x3D; WorkerConfig.pluginLocations(pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka Distributed Connect启动过程">
+<meta property="og:url" content="http://jilichao.github.io/2021/12/01/Kafka-Distributed-Connect-Start-Process/index.html">
+<meta property="og:site_name" content="知秋">
+<meta property="og:description" content="加载Plugin调用Plugins构造函数初始化Plugins对象 1Plugins plugins &#x3D; new Plugins(workerProps); 在构造函数中会获取plugin.path的配置信息作为插件的加载目录 1234567List&lt;String&gt; pluginLocations &#x3D; WorkerConfig.pluginLocations(pro">
+<meta property="article:published_time" content="2021-11-30T23:52:00.000Z">
+<meta property="article:modified_time" content="2021-12-22T02:14:59.662Z">
+<meta property="article:author" content="ZhiQiu">
+<meta property="article:tag" content="Kafka">
+<meta property="article:tag" content="Connect">
+<meta property="article:tag" content="Distributed">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jilichao.github.io/2021/12/01/Kafka-Distributed-Connect-Start-Process/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Kafka Distributed Connect启动过程 | 知秋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">知秋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">观一叶而知秋</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/12/01/Kafka-Distributed-Connect-Start-Process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kafka Distributed Connect启动过程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-01 07:52:00" itemprop="dateCreated datePublished" datetime="2021-12-01T07:52:00+08:00">2021-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-22 10:14:59" itemprop="dateModified" datetime="2021-12-22T10:14:59+08:00">2021-12-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="加载Plugin"><a href="#加载Plugin" class="headerlink" title="加载Plugin"></a>加载Plugin</h2><p>调用Plugins构造函数初始化Plugins对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plugins plugins &#x3D; new Plugins(workerProps);</span><br></pre></td></tr></table></figure>
+<p>在构造函数中会获取plugin.path的配置信息作为插件的加载目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; pluginLocations &#x3D; WorkerConfig.pluginLocations(props);</span><br><span class="line">public static List&lt;String&gt; pluginLocations(Map&lt;String, String&gt; props) &#123;</span><br><span class="line">    String locationList &#x3D; props.get(WorkerConfig.PLUGIN_PATH_CONFIG);</span><br><span class="line">    return locationList &#x3D;&#x3D; null</span><br><span class="line">                         ? new ArrayList&lt;String&gt;()</span><br><span class="line">                         : Arrays.asList(COMMA_WITH_WHITESPACE.split(locationList.trim(), -1));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来会用上面取得的路径信息初始化DelegatingClassLoader，并调用initLoaders方法加载Plugins</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delegatingLoader &#x3D; newDelegatingClassLoader(pluginLocations);</span><br><span class="line">delegatingLoader.initLoaders();</span><br></pre></td></tr></table></figure>
+<p>在initLoaders中首先调用initPluginLoader来初始化PluginLoader，然后调用addAllAliases为Plugin添加别名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (String configPath : pluginPaths) &#123;</span><br><span class="line">    initPluginLoader(configPath);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; Finally add parent&#x2F;system loader.</span><br><span class="line">initPluginLoader(CLASSPATH_NAME);</span><br><span class="line">addAllAliases();</span><br></pre></td></tr></table></figure>
+<p>在方法initPluginLoader中对非CLASSPATH_NAME路径首先调用registerPlugin初始化PluginClassLoader，后续处理逻辑与对CLASSPATH_NAME路径的处理逻辑相同。调用过程为通过scanUrlsAndAddPlugins-&gt;scanPluginPath-&gt;getPluginDesc和getServiceLoaderPluginDesc取得路径中的Connector, Converter, HeaderConverter, Transformation, ConfigProvider, ConnectRestExtension, ConnectorClientConfigOverridePolicy等类或接口的实现类，然后通过scanUrlsAndAddPlugins-&gt;loadJdbcDrivers加载JDBC驱动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">private void scanUrlsAndAddPlugins(</span><br><span class="line">        ClassLoader loader,</span><br><span class="line">        URL[] urls,</span><br><span class="line">        Path pluginLocation</span><br><span class="line">) throws InstantiationException, IllegalAccessException &#123;</span><br><span class="line">    PluginScanResult plugins &#x3D; scanPluginPath(loader, urls);</span><br><span class="line">    log.info(&quot;Registered loader: &#123;&#125;&quot;, loader);</span><br><span class="line">    if (!plugins.isEmpty()) &#123;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;加载JDBC驱动</span><br><span class="line">    loadJdbcDrivers(loader);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private PluginScanResult scanPluginPath(</span><br><span class="line">            ClassLoader loader,</span><br><span class="line">            URL[] urls</span><br><span class="line">) throws InstantiationException, IllegalAccessException &#123;</span><br><span class="line">    ConfigurationBuilder builder &#x3D; new ConfigurationBuilder();</span><br><span class="line">    builder.setClassLoaders(new ClassLoader[]&#123;loader&#125;);</span><br><span class="line">    builder.addUrls(urls);</span><br><span class="line">    builder.setScanners(new SubTypesScanner());</span><br><span class="line">    builder.useParallelExecutor();</span><br><span class="line">    Reflections reflections &#x3D; new InternalReflections(builder);</span><br><span class="line"></span><br><span class="line">    return new PluginScanResult(</span><br><span class="line">            getPluginDesc(reflections, Connector.class, loader),</span><br><span class="line">            getPluginDesc(reflections, Converter.class, loader),</span><br><span class="line">            getPluginDesc(reflections, HeaderConverter.class, loader),</span><br><span class="line">            getPluginDesc(reflections, Transformation.class, loader),</span><br><span class="line">            getServiceLoaderPluginDesc(ConfigProvider.class, loader),</span><br><span class="line">            getServiceLoaderPluginDesc(ConnectRestExtension.class, loader),</span><br><span class="line">            getServiceLoaderPluginDesc(ConnectorClientConfigOverridePolicy.class, loader)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private &lt;T&gt; Collection&lt;PluginDesc&lt;T&gt;&gt; getPluginDesc(</span><br><span class="line">            Reflections reflections,</span><br><span class="line">            Class&lt;T&gt; klass,</span><br><span class="line">            ClassLoader loader</span><br><span class="line">) throws InstantiationException, IllegalAccessException &#123;</span><br><span class="line">    Set&lt;Class&lt;? extends T&gt;&gt; plugins;</span><br><span class="line">    try &#123;</span><br><span class="line">        plugins &#x3D; reflections.getSubTypesOf(klass);</span><br><span class="line">    &#125; catch (ReflectionsException e) &#123;</span><br><span class="line">        log.debug(&quot;Reflections scanner could not find any classes for URLs: &quot; +</span><br><span class="line">                reflections.getConfiguration().getUrls(), e);</span><br><span class="line">        return Collections.emptyList();</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private &lt;T&gt; Collection&lt;PluginDesc&lt;T&gt;&gt; getServiceLoaderPluginDesc(Class&lt;T&gt; klass, ClassLoader loader) &#123;</span><br><span class="line">    ClassLoader savedLoader &#x3D; Plugins.compareAndSwapLoaders(loader);</span><br><span class="line">    Collection&lt;PluginDesc&lt;T&gt;&gt; result &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    try &#123;</span><br><span class="line">        ServiceLoader&lt;T&gt; serviceLoader &#x3D; ServiceLoader.load(klass, loader);</span><br><span class="line">        for (T pluginImpl : serviceLoader) &#123;</span><br><span class="line">            result.add(new PluginDesc&lt;&gt;((Class&lt;? extends T&gt;) pluginImpl.getClass(),</span><br><span class="line">                versionFor(pluginImpl), loader));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        Plugins.compareAndSwapLoaders(savedLoader);</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实例化Config"><a href="#实例化Config" class="headerlink" title="实例化Config"></a>实例化Config</h2><p>Config加载的逻辑相对简单的多，最终是通过ConfigDef.parse将传入的Map转换成匹配的键值对。</p>
+<h2 id="Cluster-ID"><a href="#Cluster-ID" class="headerlink" title="Cluster ID"></a>Cluster ID</h2><p>ClusterId的获取过程是首先通过KafkaAdminClient.createInternal方法生成KafkaAdminClient对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Admin adminClient &#x3D; Admin.create(config.originals())</span><br><span class="line"></span><br><span class="line">static Admin create(Map&lt;String, Object&gt; conf) &#123;</span><br><span class="line">    return KafkaAdminClient.createInternal(new AdminClientConfig(conf, true), null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后调用KafkaAdminClient.describeCluster().clusterId()方法取得ClusterId, 具体的逻辑是在处理Kafka响应的回调函数里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void handleResponse(AbstractResponse abstractResponse) &#123;</span><br><span class="line">    MetadataResponse response &#x3D; (MetadataResponse) abstractResponse;</span><br><span class="line">    describeClusterFuture.complete(response.brokers());</span><br><span class="line">    controllerFuture.complete(controller(response));</span><br><span class="line">    clusterIdFuture.complete(response.clusterId());</span><br><span class="line">    authorizedOperationsFuture.complete(</span><br><span class="line">            validAclOperations(response.clusterAuthorizedOperations()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Rest初始化"><a href="#Rest初始化" class="headerlink" title="Rest初始化"></a>Rest初始化</h2><p>首先将Config传入RestServer的构造函数，根据配置信息取得hostname和port生成listener地址，取得配置中的adminListener地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RestServer rest &#x3D; new RestServer(config);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;RestServer构造函数</span><br><span class="line">List&lt;String&gt; listeners &#x3D; parseListeners();</span><br><span class="line">List&lt;String&gt; adminListeners &#x3D; config.getList(WorkerConfig.ADMIN_LISTENERS_CONFIG);</span><br></pre></td></tr></table></figure>
+<p>其次生成Jetty Server对象和ContextHandler</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jettyServer &#x3D; new Server();</span><br><span class="line">handlers &#x3D; new ContextHandlerCollection();</span><br></pre></td></tr></table></figure>
+<p>然后根据listener和adminListener生成Connector对象添加到Jetty Server中。如果协议使用的是HTTPS，则会根据配置信息生成SSL/TLS，如果配置信息不包含SSL信息则生成默认的SSL/TLS。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">createConnectors(listeners, adminListeners);</span><br><span class="line"></span><br><span class="line">public Connector createConnector(String listener, boolean isAdmin) &#123;</span><br><span class="line">    Matcher listenerMatcher &#x3D; LISTENER_PATTERN.matcher(listener);</span><br><span class="line"></span><br><span class="line">    if (!listenerMatcher.matches())</span><br><span class="line">        throw new ConfigException(&quot;Listener doesn&#39;t have the right format (protocol:&#x2F;&#x2F;hostname:port).&quot;);</span><br><span class="line"></span><br><span class="line">    String protocol &#x3D; listenerMatcher.group(1).toLowerCase(Locale.ENGLISH);</span><br><span class="line"></span><br><span class="line">    if (!PROTOCOL_HTTP.equals(protocol) &amp;&amp; !PROTOCOL_HTTPS.equals(protocol))</span><br><span class="line">        throw new ConfigException(String.format(&quot;Listener protocol must be either \&quot;%s\&quot; or \&quot;%s\&quot;.&quot;, PROTOCOL_HTTP, PROTOCOL_HTTPS));</span><br><span class="line"></span><br><span class="line">    String hostname &#x3D; listenerMatcher.group(2);</span><br><span class="line">    int port &#x3D; Integer.parseInt(listenerMatcher.group(3));</span><br><span class="line"></span><br><span class="line">    ServerConnector connector;</span><br><span class="line"></span><br><span class="line">    if (PROTOCOL_HTTPS.equals(protocol)) &#123;</span><br><span class="line">        SslContextFactory ssl;</span><br><span class="line">        if (isAdmin) &#123;</span><br><span class="line">            ssl &#x3D; SSLUtils.createServerSideSslContextFactory(config, ADMIN_LISTENERS_HTTPS_CONFIGS_PREFIX);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            ssl &#x3D; SSLUtils.createServerSideSslContextFactory(config);</span><br><span class="line">        &#125;</span><br><span class="line">        connector &#x3D; new ServerConnector(jettyServer, ssl);</span><br><span class="line">        if (!isAdmin) &#123;</span><br><span class="line">            connector.setName(String.format(&quot;%s_%s%d&quot;, PROTOCOL_HTTPS, hostname, port));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        connector &#x3D; new ServerConnector(jettyServer);</span><br><span class="line">        if (!isAdmin) &#123;</span><br><span class="line">            connector.setName(String.format(&quot;%s_%s%d&quot;, PROTOCOL_HTTP, hostname, port));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (isAdmin) &#123;</span><br><span class="line">        connector.setName(ADMIN_SERVER_CONNECTOR_NAME);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (!hostname.isEmpty())</span><br><span class="line">        connector.setHost(hostname);</span><br><span class="line"></span><br><span class="line">    connector.setPort(port);</span><br><span class="line"></span><br><span class="line">    return connector;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后调用initializeServer设置静态资源处理器并启动Jetty Server.</p>
+<h2 id="配置Offset-store"><a href="#配置Offset-store" class="headerlink" title="配置Offset store"></a>配置Offset store</h2><p>KafkaOffsetBackingStore使用topic来存储连接器消费的topic的偏移信息，存储偏移信息的topic的名称是以offset.storage.topic为key的配置项，默认为connect-offsets。KafkaOffsetBackingStore会创建Producer用于将偏移信息更新至topic中，同时也会创建Consumer用以获取其他连接器节点更新的偏移位置。KafkaOffsetBackingStore中用于存储最新offset的对象为名为data的HashMap</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private HashMap&lt;ByteBuffer, ByteBuffer&gt; data;</span><br></pre></td></tr></table></figure>
+<p>接收更新偏移位置的回调函数为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private final Callback&lt;ConsumerRecord&lt;byte[], byte[]&gt;&gt; consumedCallback &#x3D; new Callback&lt;ConsumerRecord&lt;byte[], byte[]&gt;&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCompletion(Throwable error, ConsumerRecord&lt;byte[], byte[]&gt; record) &#123;</span><br><span class="line">        ByteBuffer key &#x3D; record.key() !&#x3D; null ? ByteBuffer.wrap(record.key()) : null;</span><br><span class="line">        ByteBuffer value &#x3D; record.value() !&#x3D; null ? ByteBuffer.wrap(record.value()) : null;</span><br><span class="line">        data.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="实例化Worker"><a href="#实例化Worker" class="headerlink" title="实例化Worker"></a>实例化Worker</h2><p>Worker拥有节点上所有的Connector和Task实例，对Connector的创建、启动、停止等操作都是通过Worker来完成的。在Worker的构造函数中没有特别的逻辑，主要是持有一些外部对象的实例。</p>
+<h2 id="配置Status-store"><a href="#配置Status-store" class="headerlink" title="配置Status store"></a>配置Status store</h2><p>KafkaStatusBackingStore的逻辑跟Offset store的逻辑类似，默认存储status的topic名为connect-status, 它维护了Connector、Task和Topic的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected final Table&lt;String, Integer, CacheEntry&lt;TaskStatus&gt;&gt; tasks;</span><br><span class="line">protected final Map&lt;String, CacheEntry&lt;ConnectorStatus&gt;&gt; connectors;</span><br><span class="line">protected final ConcurrentMap&lt;String, ConcurrentMap&lt;String, TopicStatus&gt;&gt; topics;</span><br></pre></td></tr></table></figure>
+<p>回调函数为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Callback&lt;ConsumerRecord&lt;String, byte[]&gt;&gt; readCallback &#x3D; new Callback&lt;ConsumerRecord&lt;String, byte[]&gt;&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCompletion(Throwable error, ConsumerRecord&lt;String, byte[]&gt; record) &#123;</span><br><span class="line">        read(record);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void read(ConsumerRecord&lt;String, byte[]&gt; record) &#123;</span><br><span class="line">    String key &#x3D; record.key();</span><br><span class="line">    if (key.startsWith(CONNECTOR_STATUS_PREFIX)) &#123;</span><br><span class="line">        readConnectorStatus(key, record.value());</span><br><span class="line">    &#125; else if (key.startsWith(TASK_STATUS_PREFIX)) &#123;</span><br><span class="line">        readTaskStatus(key, record.value());</span><br><span class="line">    &#125; else if (key.startsWith(TOPIC_STATUS_PREFIX)) &#123;</span><br><span class="line">        readTopicStatus(key, record.value());</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        log.warn(&quot;Discarding record with invalid key &#123;&#125;&quot;, key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="配置Config-store"><a href="#配置Config-store" class="headerlink" title="配置Config store"></a>配置Config store</h2><p>KafkaConfigBackingStore的逻辑与status store的逻辑类似，默认topic名称为connect-configs，维护Connector和Task配置的变量为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private final Map&lt;String, Integer&gt; connectorTaskCounts &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">private final Map&lt;String, Map&lt;String, String&gt;&gt; connectorConfigs &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">private final Map&lt;ConnectorTaskId, Map&lt;String, String&gt;&gt; taskConfigs &#x3D; new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<p>它的回调函数要稍显复杂，当回调发生时KafkaConfigBackingStore首先会判断消息的内容，然后执行本地缓存的更新, 然后通过调用持有的DistributedHerder的ConfigUpdateListener对象的onXXX方法通知DistributedHerder执行相应的处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">private class ConsumeCallback implements Callback&lt;ConsumerRecord&lt;String, byte[]&gt;&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCompletion(Throwable error, ConsumerRecord&lt;String, byte[]&gt; record) &#123;</span><br><span class="line">        if (error !&#x3D; null) &#123;</span><br><span class="line">            log.error(&quot;Unexpected in consumer callback for KafkaConfigBackingStore: &quot;, error);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        final SchemaAndValue value;</span><br><span class="line">        try &#123;</span><br><span class="line">            value &#x3D; converter.toConnectData(topic, record.value());</span><br><span class="line">        &#125; catch (DataException e) &#123;</span><br><span class="line">            log.error(&quot;Failed to convert config data to Kafka Connect format: &quot;, e);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; Make the recorded offset match the API used for positions in the consumer -- return the offset of the</span><br><span class="line">        &#x2F;&#x2F; *next record*, not the last one consumed.</span><br><span class="line">        offset &#x3D; record.offset() + 1;</span><br><span class="line"></span><br><span class="line">        if (record.key().startsWith(TARGET_STATE_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started &amp;&amp; !removed)</span><br><span class="line">                updateListener.onConnectorTargetStateChange(connectorName);</span><br><span class="line">        &#125; else if (record.key().startsWith(CONNECTOR_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started) &#123;</span><br><span class="line">                if (removed)</span><br><span class="line">                    updateListener.onConnectorConfigRemove(connectorName);</span><br><span class="line">                else</span><br><span class="line">                    updateListener.onConnectorConfigUpdate(connectorName);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else if (record.key().startsWith(TASK_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">        &#125; else if (record.key().startsWith(COMMIT_TASKS_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started)</span><br><span class="line">                updateListener.onTaskConfigUpdate(updatedTasks);</span><br><span class="line">        &#125; else if (record.key().equals(SESSION_KEY_KEY)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started)</span><br><span class="line">                updateListener.onSessionKeyUpdate(KafkaConfigBackingStore.this.sessionKey);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            log.error(&quot;Discarding config update record with invalid key: &#123;&#125;&quot;, record.key());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="初始化Herder"><a href="#初始化Herder" class="headerlink" title="初始化Herder"></a>初始化Herder</h2><p>在DistributedHerder构造函数中，会将前面创建的对象通过直接持有或者间接持有的方式传递给DistributedHerder对象，同时生成ConfigUpdateListener对象传递给configBackingStore，也就是上面提到的config update的逻辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configBackingStore.setUpdateListener(new ConfigUpdateListener());</span><br></pre></td></tr></table></figure>
+<h2 id="启动Connect"><a href="#启动Connect" class="headerlink" title="启动Connect"></a>启动Connect</h2><p>在Connect的构造函数中会将Herder对象和RestServer对象传递进来. 当执行start方法时，首先会执行DistributedHerder的start方法，然后执行RestServer的initializeResources将Herder与RestServer绑定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public void start() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        log.info(&quot;Kafka Connect starting&quot;);</span><br><span class="line">        Exit.addShutdownHook(&quot;connect-shutdown-hook&quot;, shutdownHook);</span><br><span class="line"></span><br><span class="line">        herder.start();</span><br><span class="line">        rest.initializeResources(herder);</span><br><span class="line"></span><br><span class="line">        log.info(&quot;Kafka Connect started&quot;);</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        startLatch.countDown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于DistributedHerder实现了Runnable，在start时通过submit方法将自己作为新的线程实例启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void start() &#123;</span><br><span class="line">    this.herderExecutor.submit(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void run() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        log.info(&quot;Herder starting&quot;);</span><br><span class="line"></span><br><span class="line">        startServices();</span><br><span class="line"></span><br><span class="line">        log.info(&quot;Herder started&quot;);</span><br><span class="line"></span><br><span class="line">        while (!stopping.get()) &#123;</span><br><span class="line">            tick();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        halt();</span><br><span class="line"></span><br><span class="line">        log.info(&quot;Herder stopped&quot;);</span><br><span class="line">        herderMetrics.close();</span><br><span class="line">    &#125; catch (Throwable t) &#123;</span><br><span class="line">        log.error(&quot;Uncaught exception in herder work thread, exiting: &quot;, t);</span><br><span class="line">        Exit.exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在startServices中会依次启动worker，status store，config store, 在worker的start中会启动offset store</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">protected void startServices() &#123;</span><br><span class="line">    this.worker.start();</span><br><span class="line">    this.statusBackingStore.start();</span><br><span class="line">    this.configBackingStore.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在RestServer的initializeResources方法中会通过调用ResourceConfig的register方法将Rest请求路径”/“,”connector”及”connector-plugins”与herder绑定起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resourceConfig.register(new RootResource(herder));</span><br><span class="line">resourceConfig.register(new ConnectorsResource(herder, config));</span><br><span class="line">resourceConfig.register(new ConnectorPluginsResource(herder));</span><br></pre></td></tr></table></figure>
+<p>然后对RestServer日志、跨域等根据配置做一些特定设置，至此Kafka Connect started.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kafka/" rel="tag"># Kafka</a>
+              <a href="/tags/Connect/" rel="tag"># Connect</a>
+              <a href="/tags/Distributed/" rel="tag"># Distributed</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/17/SpringBoot-application-integrate-with-CAS-client/" rel="prev" title="CAS 学习(二)--SpringBoot整合CAS">
+      <i class="fa fa-chevron-left"></i> CAS 学习(二)--SpringBoot整合CAS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/20/OPCDA-Automation-Interface/" rel="next" title="OPC DA开发常用接口规范介绍-OPCDAAuto自动化接口">
+      OPC DA开发常用接口规范介绍-OPCDAAuto自动化接口 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载Plugin"><span class="nav-number">1.</span> <span class="nav-text">加载Plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化Config"><span class="nav-number">2.</span> <span class="nav-text">实例化Config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster-ID"><span class="nav-number">3.</span> <span class="nav-text">Cluster ID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rest初始化"><span class="nav-number">4.</span> <span class="nav-text">Rest初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Offset-store"><span class="nav-number">5.</span> <span class="nav-text">配置Offset store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化Worker"><span class="nav-number">6.</span> <span class="nav-text">实例化Worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Status-store"><span class="nav-number">7.</span> <span class="nav-text">配置Status store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Config-store"><span class="nav-number">8.</span> <span class="nav-text">配置Config store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化Herder"><span class="nav-number">9.</span> <span class="nav-text">初始化Herder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动Connect"><span class="nav-number">10.</span> <span class="nav-text">启动Connect</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhiQiu"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">ZhiQiu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jilichao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jilichao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhiQiu</span>
+    <span style="padding-left: 20px;">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
