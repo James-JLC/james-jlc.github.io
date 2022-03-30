@@ -115,7 +115,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -152,6 +152,161 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2022/03/30/Setup-Go-Environment-on-Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/30/Setup-Go-Environment-on-Ubuntu/" class="post-title-link" itemprop="url">在Ubuntu上配置Go开发环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-30 10:54:57 / 修改时间：11:40:23" itemprop="dateCreated datePublished" datetime="2022-03-30T10:54:57+08:00">2022-03-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Remove-any-previous-Go-installation"><a href="#Remove-any-previous-Go-installation" class="headerlink" title="Remove any previous Go installation"></a>Remove any previous Go installation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf &#x2F;usr&#x2F;local&#x2F;go</span><br></pre></td></tr></table></figure>
+<h2 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;golang.google.cn&#x2F;dl&#x2F;go1.18.linux-amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="Extract-the-archive"><a href="#Extract-the-archive" class="headerlink" title="Extract the archive"></a>Extract the archive</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf go1.18.linux-amd64.tar.gz -C &#x2F;usr&#x2F;local</span><br></pre></td></tr></table></figure>
+<h2 id="create-GOPATH"><a href="#create-GOPATH" class="headerlink" title="create GOPATH"></a>create GOPATH</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~&#x2F;workspace&#x2F;go&#x2F;bin ~&#x2F;workspace&#x2F;go&#x2F;src ~&#x2F;workspace&#x2F;go&#x2F;pkg</span><br></pre></td></tr></table></figure>
+<h2 id="set-go-env"><a href="#set-go-env" class="headerlink" title="set go env"></a>set go env</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo tee -a $HOME&#x2F;.bashrc &lt;&lt;-&#39;EOF&#39;</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export GOPATH&#x3D;~&#x2F;workspace&#x2F;go</span><br><span class="line">export GO111MODULE&#x3D;&quot;on&quot;</span><br><span class="line">export GOPROXY&#x3D;https:&#x2F;&#x2F;proxy.golang.com.cn,direct</span><br><span class="line">export PATH&#x3D;$PATH:$GOROOT&#x2F;bin:$GOPATH&#x2F;bin</span><br><span class="line">EOF</span><br><span class="line">source $HOME&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/12/24/Install-k8s-on-Ubuntu-18-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/24/Install-k8s-on-Ubuntu-18-04/" class="post-title-link" itemprop="url">Install K8S on Ubuntu 18.04</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-24 14:38:01" itemprop="dateCreated datePublished" datetime="2021-12-24T14:38:01+08:00">2021-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-15 18:25:13" itemprop="dateModified" datetime="2022-03-15T18:25:13+08:00">2022-03-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Config-all-nodes-environment"><a href="#Config-all-nodes-environment" class="headerlink" title="Config all nodes environment"></a>Config all nodes environment</h1><h2 id="Letting-iptables-see-bridged-traffic"><a href="#Letting-iptables-see-bridged-traffic" class="headerlink" title="Letting iptables see bridged traffic"></a>Letting iptables see bridged traffic</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | sudo tee &#x2F;etc&#x2F;modules-load.d&#x2F;k8s.conf</span><br><span class="line">br_netfilter</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF | sudo tee &#x2F;etc&#x2F;sysctl.d&#x2F;k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables &#x3D; 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables &#x3D; 1</span><br><span class="line">net.ipv4.ip_forward&#x3D;1</span><br><span class="line">EOF</span><br><span class="line">sudo sysctl --system</span><br></pre></td></tr></table></figure>
+<h2 id="Turn-off-firewall"><a href="#Turn-off-firewall" class="headerlink" title="Turn off firewall"></a>Turn off firewall</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop ufw</span><br><span class="line">sudo systemctl disable ufw</span><br></pre></td></tr></table></figure>
+<h2 id="Turn-off-swap"><a href="#Turn-off-swap" class="headerlink" title="Turn off swap"></a>Turn off swap</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff -a &amp;&amp; sudo sysctl -w vm.swappiness&#x3D;0</span><br><span class="line">sudo sed -ri &#39;&#x2F;^[^#]*swap&#x2F;s@^@#@&#39; &#x2F;etc&#x2F;fstab</span><br></pre></td></tr></table></figure>
+<h2 id="Install-docker"><a href="#Install-docker" class="headerlink" title="Install docker"></a>Install docker</h2><p>Please refer <a href="/2020/09/15/How-Install-Docker-and-Docker-Compose-On-Ubuntu/" title="How Install Docker and Docker Compose On Ubuntu">How Install Docker and Docker Compose On Ubuntu</a></p>
+<h2 id="Change-docker-cgroup-driver-to-“systemd”"><a href="#Change-docker-cgroup-driver-to-“systemd”" class="headerlink" title="Change docker cgroup driver to “systemd”"></a>Change docker cgroup driver to “systemd”</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br></pre></td></tr></table></figure>
+<p>Add content</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Restart-docker"><a href="#Restart-docker" class="headerlink" title="Restart docker"></a>Restart docker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker</span><br><span class="line">sudo systemctl enable docker</span><br></pre></td></tr></table></figure>
+<h2 id="Install-K8S"><a href="#Install-K8S" class="headerlink" title="Install K8S"></a>Install K8S</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -s https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;apt&#x2F;doc&#x2F;apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;kubernetes.list &lt;&lt;-&#39;EOF&#39;</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;apt kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y kubeadm kubectl kubelet</span><br></pre></td></tr></table></figure>
+<h1 id="Init-K8S-on-master"><a href="#Init-K8S-on-master" class="headerlink" title="Init K8S on master"></a>Init K8S on master</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo kubeadm init --image-repository registry.aliyuncs.com&#x2F;google_containers --pod-network-cidr&#x3D;10.244.0.0&#x2F;16</span><br></pre></td></tr></table></figure>
+<p>Once K8S initialize successfully, you will see output like this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p $HOME&#x2F;.kube</span><br><span class="line">  sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">  sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br><span class="line"></span><br><span class="line">Alternatively, if you are the root user, you can run:</span><br><span class="line"></span><br><span class="line">  export KUBECONFIG&#x3D;&#x2F;etc&#x2F;kubernetes&#x2F;admin.conf</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:</span><br><span class="line">  https:&#x2F;&#x2F;kubernetes.io&#x2F;docs&#x2F;concepts&#x2F;cluster-administration&#x2F;addons&#x2F;</span><br><span class="line"></span><br><span class="line">Then you can join any number of worker nodes by running the following on each as root:</span><br><span class="line"></span><br><span class="line">kubeadm join 192.168.2.8:6443 --token 8borel.phprbzxwjupl3cuy \</span><br><span class="line">	--discovery-token-ca-cert-hash sha256:c441bbee5846711e3c00260e6daebc31258fcf8b9dbf7bb7b8b3b2c10f6ffbdf</span><br></pre></td></tr></table></figure>
+<p>Create new token with the following command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm token create --print-join-command</span><br></pre></td></tr></table></figure>
+<p>Copy config file to HOME folder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br></pre></td></tr></table></figure>
+<h2 id="Install-flannel"><a href="#Install-flannel" class="headerlink" title="Install flannel"></a>Install flannel</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml -o kube-flannel.yaml</span><br><span class="line"></span><br><span class="line">kubectl apply -f kube-flannel.yaml</span><br></pre></td></tr></table></figure>
+<h2 id="Check-node-status"><a href="#Check-node-status" class="headerlink" title="Check node status"></a>Check node status</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes -o wide</span><br></pre></td></tr></table></figure>
+<h1 id="Add-nodes-to-cluster"><a href="#Add-nodes-to-cluster" class="headerlink" title="Add nodes to cluster"></a>Add nodes to cluster</h1><p>Run the command on worker node</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join 192.168.2.8:6443 --token 8borel.phprbzxwjupl3cuy \</span><br><span class="line">	--discovery-token-ca-cert-hash sha256:c441bbee5846711e3c00260e6daebc31258fcf8b9dbf7bb7b8b3b2c10f6ffbdf</span><br></pre></td></tr></table></figure>
+<h1 id="Config-GPU-node"><a href="#Config-GPU-node" class="headerlink" title="Config GPU node"></a>Config GPU node</h1><p>If your worker nodes are GPU servers, you should install nvidia-docker2 on it</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">distribution&#x3D;$(. &#x2F;etc&#x2F;os-release;echo $ID$VERSION_ID) \</span><br><span class="line">   &amp;&amp; curl -s -L https:&#x2F;&#x2F;nvidia.github.io&#x2F;nvidia-docker&#x2F;gpgkey | sudo apt-key add - \</span><br><span class="line">   &amp;&amp; curl -s -L https:&#x2F;&#x2F;nvidia.github.io&#x2F;nvidia-docker&#x2F;$distribution&#x2F;nvidia-docker.list | sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;nvidia-docker.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y nvidia-docker2</span><br></pre></td></tr></table></figure>
+<h2 id="Change-container-default-runtime"><a href="#Change-container-default-runtime" class="headerlink" title="Change container default runtime"></a>Change container default runtime</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br></pre></td></tr></table></figure>
+<p>Change default docker runtime to nvidia</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],</span><br><span class="line">    &quot;default-runtime&quot;: &quot;nvidia&quot;,</span><br><span class="line">    &quot;runtimes&quot;: &#123;</span><br><span class="line">        &quot;nvidia&quot;: &#123;</span><br><span class="line">            &quot;path&quot;: &quot;nvidia-container-runtime&quot;,</span><br><span class="line">            &quot;runtimeArgs&quot;: []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Restart docker service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h2 id="Install-nvidia-device-plugin-on-master"><a href="#Install-nvidia-device-plugin-on-master" class="headerlink" title="Install nvidia device plugin on master"></a>Install nvidia device plugin on master</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NVIDIA&#x2F;k8s-device-plugin&#x2F;master&#x2F;nvidia-device-plugin.yml -o nvidia-device-plugin.yml</span><br><span class="line">kubectl apply -f nvidia-device-plugin.yml</span><br></pre></td></tr></table></figure>
+<h2 id="Enable-kubectl-bash-completion-and-alias"><a href="#Enable-kubectl-bash-completion-and-alias" class="headerlink" title="Enable kubectl bash completion and alias"></a>Enable kubectl bash completion and alias</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source &lt;(kubectl completion bash)</span><br><span class="line">alias k&#x3D;kubectl</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -702,7 +857,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 12:07:41" itemprop="dateModified" datetime="2020-12-30T12:07:41+08:00">2020-12-30</time>
+                <time title="修改时间：2022-03-15 17:47:02" itemprop="dateModified" datetime="2022-03-15T17:47:02+08:00">2022-03-15</time>
               </span>
 
           
@@ -718,11 +873,16 @@
       
           <h2 id="Install-Docker-Engine-on-Ubuntu"><a href="#Install-Docker-Engine-on-Ubuntu" class="headerlink" title="Install Docker Engine on Ubuntu"></a><a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener">Install Docker Engine on Ubuntu</a></h2><h3 id="Uninstall-old-versions"><a href="#Uninstall-old-versions" class="headerlink" title="Uninstall old versions"></a>Uninstall old versions</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
 
-<h3 id="Set-up-the-repository"><a href="#Set-up-the-repository" class="headerlink" title="Set up the repository"></a>Set up the repository</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg-agent \</span><br><span class="line">    software-properties-common</span><br><span class="line"></span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+<h3 id="Set-up-the-repository"><a href="#Set-up-the-repository" class="headerlink" title="Set up the repository"></a>Set up the repository</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get -y install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg-agent \</span><br><span class="line">    software-properties-common</span><br><span class="line"></span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
 
-<h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository \</span><br><span class="line">   <span class="string">"deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">   <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">   stable"</span></span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br><span class="line"></span><br><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+<h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository \</span><br><span class="line">   <span class="string">"deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">   <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">   stable"</span></span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y docker-ce docker-ce-cli containerd.io</span><br><span class="line"></span><br><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Install-Docker-Compose"><a href="#Install-Docker-Compose" class="headerlink" title="Install Docker Compose"></a><a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Install Docker Compose</a></h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.27.1/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"></span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"></span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<h2 id="Add-registry-mirrors-and-insecure-registry"><a href="#Add-registry-mirrors-and-insecure-registry" class="headerlink" title="Add registry-mirrors and insecure-registry"></a>Add registry-mirrors and insecure-registry</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br></pre></td></tr></table></figure>
+<p>Content</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https:&#x2F;&#x2F;registry.docker-cn.com&quot;],</span><br><span class="line">  &quot;insecure-registries&quot; : [&quot;myregistrydomain.com:5000&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="config-docker-log-driver"><a href="#config-docker-log-driver" class="headerlink" title="config docker log driver"></a>config docker log driver</h2><p>The following example sets the log driver to json-file and sets the max-size and max-file options to enable automatic log-rotation.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">  &quot;log-opts&quot;: &#123;</span><br><span class="line">    &quot;max-size&quot;: &quot;500m&quot;,</span><br><span class="line">    &quot;max-file&quot;: &quot;3&quot; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -791,168 +951,6 @@
 <h3 id="Configure-JDK"><a href="#Configure-JDK" class="headerlink" title="Configure JDK"></a>Configure JDK</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_XXX/bin/java 300  </span><br><span class="line">sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.8.0_XXX/bin/javac 300  </span><br><span class="line">sudo update-alternatives --install /usr/bin/jar jar /usr/lib/jvm/jdk1.8.0_XXX/bin/jar 300   </span><br><span class="line">sudo update-alternatives --install /usr/bin/javah javah /usr/lib/jvm/jdk1.8.0_XXX/bin/javah 300   </span><br><span class="line">sudo update-alternatives --install /usr/bin/javap javap /usr/lib/jvm/jdk1.8.0_XXX/bin/javap 300 </span><br><span class="line"></span><br><span class="line"><span class="comment">#if you have multiple java version installed, you have to run this command</span></span><br><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
 
 <h3 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2020/07/30/Python-Dev-Environment-Setup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="ZhiQiu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知秋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/30/Python-Dev-Environment-Setup/" class="post-title-link" itemprop="url">Python Dev Environment Setup</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-30 16:11:07" itemprop="dateCreated datePublished" datetime="2020-07-30T16:11:07+08:00">2020-07-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 12:08:15" itemprop="dateModified" datetime="2020-12-30T12:08:15+08:00">2020-12-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="下载安装Miniconda"><a href="#下载安装Miniconda" class="headerlink" title="下载安装Miniconda"></a>下载安装Miniconda</h2><p>Miniconda DOC: <a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">https://docs.conda.io/en/latest/miniconda.html</a></p>
-<p>本文使用的是最新版Python3.8 for Linux,从<a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">清华大学开源软件镜像站</a>下载</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>由于网络原因，使用默认配置下载Anaconda仓库与第三方源软件包时速度过慢，因此建议使用<a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">清华镜像</a><br>修改HOME目录下的.condarc文件(没有的话则新建)，添加如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">channel_alias: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda</span><br><span class="line">default_channels:</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;r</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;pro</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  msys2: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  bioconda: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  menpo: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  pytorch: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  simpleitk: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br></pre></td></tr></table></figure>
-<p>即可添加免费仓库.</p>
-<p>运行 conda clean -i 清除索引缓存，保证用的是镜像站提供的索引。<br>##测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br><span class="line">conda create -n testenv --clone base</span><br><span class="line">conda list env</span><br><span class="line">conda activate testenv</span><br><span class="line">conda install django</span><br><span class="line">conda list</span><br><span class="line">conda deactivate</span><br><span class="line">conda env remove -n testenv</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2020/07/21/github-proxy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="ZhiQiu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知秋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/21/github-proxy/" class="post-title-link" itemprop="url">github-proxy</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-21 20:32:09" itemprop="dateCreated datePublished" datetime="2020-07-21T20:32:09+08:00">2020-07-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 12:07:48" itemprop="dateModified" datetime="2020-12-30T12:07:48+08:00">2020-12-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简介<br>针对github release、archive以及项目文件的加速项目，支持clone，有Cloudflare Workers无服务器版本以及Python版本</p>
-<p>演示<br><a href="https://gh.api.99988866.xyz/" target="_blank" rel="noopener">https://gh.api.99988866.xyz/</a></p>
-<p>GitHub地址<br><a href="https://github.com/hunshcn/gh-proxy" target="_blank" rel="noopener">https://github.com/hunshcn/gh-proxy</a></p>
-<p>Changelog<br>2020.04.09 增加Python版本（使用Flask）<br>2020.03.23 新增了clone的支持<br>2020.03.22 初始版本<br>python版本和cf worker版本差异<br>python版本支持进行文件大小限制，超过设定返回原地址 issue #8<br>使用<br>直接在copy出来的url前加<a href="https://gh.api.99988866.xyz/即可" target="_blank" rel="noopener">https://gh.api.99988866.xyz/即可</a></p>
-<p>也可以直接访问，在input输入</p>
-<p>大量使用请自行部署，以上域名仅为演示使用。</p>
-<p>以下都是合法输入：</p>
-<p>分支源码：<a href="https://github.com/hunshcn/project/archive/master.zip" target="_blank" rel="noopener">https://github.com/hunshcn/project/archive/master.zip</a><br>release源码：<a href="https://github.com/hunshcn/project/archive/v0.1.0.tar.gz" target="_blank" rel="noopener">https://github.com/hunshcn/project/archive/v0.1.0.tar.gz</a><br>release文件：<a href="https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip" target="_blank" rel="noopener">https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip</a><br>分支文件：<a href="https://github.com/hunshcn/project/blob/master/filename" target="_blank" rel="noopener">https://github.com/hunshcn/project/blob/master/filename</a><br>commit文件：<a href="https://github.com/hunshcn/project/blob/1111111111111111111111111111/filename" target="_blank" rel="noopener">https://github.com/hunshcn/project/blob/1111111111111111111111111111/filename</a><br>cf worker版本部署<br>首页：<a href="https://workers.cloudflare.com" target="_blank" rel="noopener">https://workers.cloudflare.com</a></p>
-<p>注册，登陆，Start building，取一个子域名，Create a Worker。</p>
-<p>复制 index.js 到左侧代码框，Save and deploy。如果正常，右侧应显示首页。</p>
-<p>index.js默认配置下clone走github.com.cnpmjs.org，项目文件会走jsDeliver，如需走worker，修改Config变量即可</p>
-<p>Python版本部署<br>Docker部署<br>docker run -d –name=”gh-proxy-py” <br>  -p 0.0.0.0:80:80 <br>  –restart=always <br>  hunsh/gh-proxy-py:latest<br>第一个80是你要暴露出去的端口</p>
-<p>直接部署<br>安装依赖（请使用python3）</p>
-<p>pip install flask requests</p>
-<p>按需求修改app/main.py的前几项配置</p>
-<p>注意<br>python版本的机器如果无法正常访问github.io会启动报错，请自行修改静态文件url<br>默认配置下clone走github.com.cnpmjs.org，项目文件会走jsDeliver，如需走服务器，修改配置即可</p>
-<p>计费<br>到 overview 页面可参看使用情况。免费版每天有 10 万次免费请求，并且有每分钟1000次请求的限制。</p>
-<p>如果不够用，可升级到 $5 的高级版本，每月可用 1000 万次请求（超出部分 $0.5/百万次请求）。</p>
-<p>参考<br>jsproxy<br><a href="https://github.com.cnpmjs.org/" target="_blank" rel="noopener">https://github.com.cnpmjs.org/</a></p>
-<p><a href="http://g.widyun.com/" target="_blank" rel="noopener">http://g.widyun.com/</a></p>
-<p><a href="http://gg.widyun.com/" target="_blank" rel="noopener">http://gg.widyun.com/</a></p>
-<p><a href="http://g.widora.cn/" target="_blank" rel="noopener">http://g.widora.cn/</a></p>
-<p><a href="http://github.b15.me/" target="_blank" rel="noopener">http://github.b15.me/</a></p>
-<p><a href="https://gh.api.99988866.xyz/" target="_blank" rel="noopener">https://gh.api.99988866.xyz/</a></p>
-<p><a href="https://shrill-pond-3e81.hunsh.workers.dev/" target="_blank" rel="noopener">https://shrill-pond-3e81.hunsh.workers.dev/</a></p>
-<p><a href="https://www.toolnb.com/tools/githubjiasu.html" target="_blank" rel="noopener">https://www.toolnb.com/tools/githubjiasu.html</a></p>
-
       
     </div>
 
@@ -1038,7 +1036,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1077,7 +1075,7 @@
 <div class="copyright">
   
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
