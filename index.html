@@ -115,12 +115,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -152,6 +152,75 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://james-jlc.github.io/2023/11/30/Onnxruntime-C-API-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/30/Onnxruntime-C-API-introduction/" class="post-title-link" itemprop="url">Onnxruntime C++ API 简介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-30 19:15:49 / 修改时间：20:16:05" itemprop="dateCreated datePublished" datetime="2023-11-30T19:15:49+08:00">2023-11-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用Onnxruntime C++/Python API做算法封装也有两年时间了，对常用的API做一个简单的介绍。<br>首先介绍C++的使用大体流程：</p>
+<ol>
+<li>创建运行环境，可以设置日志级别，Log ID等<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ort::Env env(OrtLoggingLevel::ORT_LOGGING_LEVEL_WARNING,&quot;APP NAME&quot;);</span><br></pre></td></tr></table></figure></li>
+<li>创建Session,model_path为ONNX模型存储的地址。另外可以通过SessionOptions设置优化级别，推理运行的Provider，如CPU， CUDA， TensorRT等。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Ort::SessionOptions session_options;</span><br><span class="line">&#x2F;&#x2F; session_options.SetGraphOptimizationLevel(Ort::ORT_ENABLE_BASIC);</span><br><span class="line">&#x2F;&#x2F; session_options.AppendExecutionProvider_CUDA(providerOptions);</span><br><span class="line">Ort::Session ort_session &#x3D; Ort::Session(env_, model_path_.c_str(), session_options);</span><br></pre></td></tr></table></figure></li>
+<li>获取模型输入输出信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">size_t numInputNodes &#x3D; ort_session-&gt;GetInputCount();</span><br><span class="line">size_t numOutputNodes &#x3D; ort_session-&gt;GetOutputCount();</span><br><span class="line">AllocatorWithDefaultOptions allocator;</span><br><span class="line">for (int i &#x3D; 0; i &lt; numInputNodes; i++)</span><br><span class="line">&#123;</span><br><span class="line">    input_names.push_back(ort_session-&gt;GetInputName(i, allocator));</span><br><span class="line">    Ort::TypeInfo input_type_info &#x3D; ort_session-&gt;GetInputTypeInfo(i);</span><br><span class="line">    auto input_tensor_info &#x3D; input_type_info.GetTensorTypeAndShapeInfo();</span><br><span class="line">    auto input_dims &#x3D; input_tensor_info.GetShape();</span><br><span class="line">    input_node_dims.push_back(input_dims);</span><br><span class="line">&#125;</span><br><span class="line">for (int i &#x3D; 0; i &lt; numOutputNodes; i++)</span><br><span class="line">&#123;</span><br><span class="line">    output_names.push_back(ort_session-&gt;GetOutputName(i, allocator));</span><br><span class="line">    Ort::TypeInfo output_type_info &#x3D; ort_session-&gt;GetOutputTypeInfo(i);</span><br><span class="line">    auto output_tensor_info &#x3D; output_type_info.GetTensorTypeAndShapeInfo();</span><br><span class="line">    auto output_dims &#x3D; output_tensor_info.GetShape();</span><br><span class="line">    output_node_dims.push_back(output_dims);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>图像预处理，如调整大小转换通道，MAT-&gt;Tensor等<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Mat img;</span><br><span class="line">Mat srcimg &#x3D; imread(imgpath);</span><br><span class="line">resize(srcimg, img, Size(tgtWidth, tgtHeight));</span><br><span class="line">vector&lt;float&gt; tensor(tgtWidth * tgtHeight * img.channels());</span><br><span class="line">for(int i &#x3D; 0; i &lt; img.rows * img.cols * 3; i++)</span><br><span class="line">&#123;</span><br><span class="line">    if(i % 3 &#x3D;&#x3D; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        tensor[i + 2] &#x3D; img.data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    else if(i % 3 &#x3D;&#x3D; 1)</span><br><span class="line">    &#123;</span><br><span class="line">        tensor[i] &#x3D; img.data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    else if(i % 3 &#x3D;&#x3D;2)</span><br><span class="line">    &#123;</span><br><span class="line">        tensor[i - 2] &#x3D; img.data[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>分配内存<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array&lt;int64_t, 4&gt; input_shape&#123; 1, 3, tgtWidth, tgtHeight&#125;;</span><br><span class="line">auto allocator_info &#x3D; MemoryInfo::CreateCpu(OrtDeviceAllocator, OrtMemTypeCPU);</span><br><span class="line">Value input_tensor &#x3D; Value::CreateTensor&lt;float&gt;(allocator_info, tensor.data(), tensor.size(), input_shape.data(), input_shape.size());</span><br></pre></td></tr></table></figure></li>
+<li>执行推理<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;Value&gt; ort_outputs &#x3D; ort_session-&gt;Run(RunOptions&#123; nullptr &#125;, &amp;input_names[0], &amp;input_tensor, 1, output_names.data(), output_names.size());</span><br></pre></td></tr></table></figure></li>
+<li>获取输出<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float* preds &#x3D; ort_outputs[0].GetTensorMutableData&lt;float&gt;();</span><br></pre></td></tr></table></figure>
+Python的大体逻辑类似<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ONNX_FILE &#x3D; &quot;xxx.onnx&quot;</span><br><span class="line">session &#x3D; onnxruntime.InferenceSession(ONNX_FILE, providers&#x3D;[&#39;CPUExecutionProvider&#39;])</span><br><span class="line">img &#x3D; img_process(src_img, infer_size)</span><br><span class="line">input_name &#x3D; session.get_inputs()[0].name</span><br><span class="line">pred_onnx &#x3D; session.run(None, &#123;input_name: imgdata&#125;)[0]</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -841,72 +910,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://james-jlc.github.io/2022/10/29/Plan-to-create-a-PDF-Editor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="ZhiQiu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知秋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/29/Plan-to-create-a-PDF-Editor/" class="post-title-link" itemprop="url">Plan to create a PDF Editor</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-29 14:20:29" itemprop="dateCreated datePublished" datetime="2022-10-29T14:20:29+08:00">2022-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>PDF.js <a href="https://github.com/mozilla/pdf.js.git" target="_blank" rel="noopener">https://github.com/mozilla/pdf.js.git</a><br>node-poppler <a href="https://github.com/Fdawgs/node-poppler" target="_blank" rel="noopener">https://github.com/Fdawgs/node-poppler</a><br>poppler<br>mupdf</p>
-<p>迅捷使用的是pspdfkit库，pspdfkit库使用的应该是poppler后端</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -978,14 +981,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
