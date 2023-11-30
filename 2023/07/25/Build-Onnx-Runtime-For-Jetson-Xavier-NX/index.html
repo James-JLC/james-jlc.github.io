@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jilichao.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文主要参考 Onnx Runtime 官方dockerfiles编译指南 查看Jetson版本1jtop 根据jtop输出确定Jetson的系统版本号 测试镜像在Nvidia镜像仓库中搜索自己需要的基础镜像。 当前常用的镜像有： l4t-base从概述中可知自r34.1及以后的版本中不再集成CUDA,CuDNN和TensorRT等组件。对于高度定制化的需求，可以使用此镜像安装特定的CUDA和Te">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build Onnx Runtime For Jetson Xavier NX">
+<meta property="og:url" content="http://jilichao.github.io/2023/07/25/Build-Onnx-Runtime-For-Jetson-Xavier-NX/index.html">
+<meta property="og:site_name" content="知秋">
+<meta property="og:description" content="本文主要参考 Onnx Runtime 官方dockerfiles编译指南 查看Jetson版本1jtop 根据jtop输出确定Jetson的系统版本号 测试镜像在Nvidia镜像仓库中搜索自己需要的基础镜像。 当前常用的镜像有： l4t-base从概述中可知自r34.1及以后的版本中不再集成CUDA,CuDNN和TensorRT等组件。对于高度定制化的需求，可以使用此镜像安装特定的CUDA和Te">
+<meta property="article:published_time" content="2023-07-25T03:32:12.000Z">
+<meta property="article:modified_time" content="2023-11-21T05:05:52.147Z">
+<meta property="article:author" content="ZhiQiu">
+<meta property="article:tag" content="Onnx Runtime">
+<meta property="article:tag" content="Jetson">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jilichao.github.io/2023/07/25/Build-Onnx-Runtime-For-Jetson-Xavier-NX/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Build Onnx Runtime For Jetson Xavier NX | 知秋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">知秋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">观一叶而知秋</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2023/07/25/Build-Onnx-Runtime-For-Jetson-Xavier-NX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Build Onnx Runtime For Jetson Xavier NX
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-25 11:32:12" itemprop="dateCreated datePublished" datetime="2023-07-25T11:32:12+08:00">2023-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文主要参考 <a href="https://github.com/microsoft/onnxruntime/blob/main/dockerfiles/README.md#nvidia-jetson-tx1tx2nanoxavier" target="_blank" rel="noopener">Onnx Runtime 官方dockerfiles编译指南</a></p>
+<h1 id="查看Jetson版本"><a href="#查看Jetson版本" class="headerlink" title="查看Jetson版本"></a>查看Jetson版本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jtop</span><br></pre></td></tr></table></figure>
+<p>根据jtop输出确定Jetson的系统版本号</p>
+<h1 id="测试镜像"><a href="#测试镜像" class="headerlink" title="测试镜像"></a>测试镜像</h1><p>在Nvidia<a href="https://catalog.ngc.nvidia.com/containers" target="_blank" rel="noopener">镜像仓库</a>中搜索自己需要的基础镜像。</p>
+<p>当前常用的镜像有：</p>
+<h2 id="l4t-base"><a href="#l4t-base" class="headerlink" title="l4t-base"></a><a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-base" target="_blank" rel="noopener">l4t-base</a></h2><p>从概述中可知自r34.1及以后的版本中不再集成CUDA,CuDNN和TensorRT等组件。对于高度定制化的需求，可以使用此镜像安装特定的CUDA和TensorRT版本。并且官方很贴心的提供了可参考的<a href="https://gitlab.com/nvidia/container-images/l4t-jetpack" target="_blank" rel="noopener">Dockerfile模板</a>。</p>
+<h2 id="l4t-cuda"><a href="#l4t-cuda" class="headerlink" title="l4t-cuda"></a><a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-cuda/" target="_blank" rel="noopener">l4t-cuda</a></h2><p>从名字可以得知此镜像集成了CUDA组件。</p>
+<h2 id="l4t-tensorrt"><a href="#l4t-tensorrt" class="headerlink" title="l4t-tensorrt"></a><a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-tensorrt/" target="_blank" rel="noopener">l4t-tensorrt</a></h2><p>从名字可以得知此镜像集成了TensorRT组件。</p>
+<h2 id="l4t-jetpack"><a href="#l4t-jetpack" class="headerlink" title="l4t-jetpack"></a><a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-jetpack" target="_blank" rel="noopener">l4t-jetpack</a></h2><p>从概述中可以得知，此镜像集成了CUDA,CuDNN和TensorRT等组件，可作为通用程序开发的基础镜像。但是因为集成了CUDA等组件，此镜像磁盘空间占用较大。</p>
+<h2 id="l4t-ml"><a href="#l4t-ml" class="headerlink" title="l4t-ml"></a><a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml" target="_blank" rel="noopener">l4t-ml</a></h2><p>从概述中可知此镜像集成了非常多的常用组件，包括TensorFlow, PyTorch, JupyterLab和其他常用的机器学习库，并且包含了scikit-learn, scipy和Pandas等一些数据分析库。因此此镜像磁盘空间占用非常大，但是因为集成了很多库所以省去了很多的编译时间。</p>
+<p>另外，对于一些常用的python库，Nvidia官方为Jetson专门提供了一个<a href="https://elinux.org/Jetson_Zoo" target="_blank" rel="noopener">集合链接</a>，可以从中查找需要的库进行下载安装。</p>
+<p>我测试的系统版本是4.4 r35.1.0,可以选择l4t-ml镜像，省去了安装环境的时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FROM nvcr.io&#x2F;nvidia&#x2F;l4t-ml:r35.1.0-py3</span><br><span class="line"></span><br><span class="line">ENV TZ&#x3D;Asia&#x2F;Shanghai</span><br><span class="line">RUN ln -snf &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;$TZ &#x2F;etc&#x2F;localtime &amp;&amp; echo $TZ &gt; &#x2F;etc&#x2F;timezone</span><br><span class="line"></span><br><span class="line">WORKDIR .&#x2F;app</span><br><span class="line"> </span><br><span class="line">ADD . .</span><br><span class="line"></span><br><span class="line">RUN pip3 install --no-cache-dir onnxruntime_gpu-1.12.1-cp38-cp38-linux_aarch64.whl &amp;&amp; rm onnxruntime_gpu-1.12.1-cp38-cp38-linux_aarch64.whl</span><br><span class="line"></span><br><span class="line">RUN pip install -r requirements.txt -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br><span class="line"></span><br><span class="line">EXPOSE 8080</span><br><span class="line">CMD [&quot;python3&quot;, &quot;.&#x2F;main.py&quot;]</span><br></pre></td></tr></table></figure>
+
+<h1 id="编译自定义镜像"><a href="#编译自定义镜像" class="headerlink" title="编译自定义镜像"></a>编译自定义镜像</h1><p>由于官方提供的镜像要么只集成了基础组件，要么集成了太多的开源库，因此当在生产环境使用时，需要根据项目需要编译自己的镜像。通常项目组会构建自己的基础镜像，在基础镜像上根据项目的需要再加入更多的组件库。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Onnx-Runtime/" rel="tag"># Onnx Runtime</a>
+              <a href="/tags/Jetson/" rel="tag"># Jetson</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/24/Investigation-of-RPA-framework/" rel="prev" title="Investigation of RPA framework">
+      <i class="fa fa-chevron-left"></i> Investigation of RPA framework
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/10/30/Crack-JDC-Router-1/" rel="next" title="破解某东路由宝之紧急升级包">
+      破解某东路由宝之紧急升级包 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查看Jetson版本"><span class="nav-number">1.</span> <span class="nav-text">查看Jetson版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试镜像"><span class="nav-number">2.</span> <span class="nav-text">测试镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#l4t-base"><span class="nav-number">2.1.</span> <span class="nav-text">l4t-base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l4t-cuda"><span class="nav-number">2.2.</span> <span class="nav-text">l4t-cuda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l4t-tensorrt"><span class="nav-number">2.3.</span> <span class="nav-text">l4t-tensorrt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l4t-jetpack"><span class="nav-number">2.4.</span> <span class="nav-text">l4t-jetpack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l4t-ml"><span class="nav-number">2.5.</span> <span class="nav-text">l4t-ml</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译自定义镜像"><span class="nav-number">3.</span> <span class="nav-text">编译自定义镜像</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhiQiu"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">ZhiQiu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jilichao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jilichao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhiQiu</span>
+    <span style="padding-left: 20px;">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

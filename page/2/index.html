@@ -115,12 +115,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -156,7 +156,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2020/07/30/Python-Dev-Environment-Setup/">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2022/08/18/Update-cmake-version-in-Ubuntu-18-04/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -170,7 +170,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/30/Python-Dev-Environment-Setup/" class="post-title-link" itemprop="url">Python Dev Environment Setup</a>
+            <a href="/2022/08/18/Update-cmake-version-in-Ubuntu-18-04/" class="post-title-link" itemprop="url">Update cmake version in Ubuntu 18.04</a>
         </h2>
 
         <div class="post-meta">
@@ -180,14 +180,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-30 16:11:07" itemprop="dateCreated datePublished" datetime="2020-07-30T16:11:07+08:00">2020-07-30</time>
+              <time title="创建时间：2022-08-18 11:05:42" itemprop="dateCreated datePublished" datetime="2022-08-18T11:05:42+08:00">2022-08-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 12:08:15" itemprop="dateModified" datetime="2020-12-30T12:08:15+08:00">2020-12-30</time>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
               </span>
 
           
@@ -201,14 +201,86 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="下载安装Miniconda"><a href="#下载安装Miniconda" class="headerlink" title="下载安装Miniconda"></a>下载安装Miniconda</h2><p>Miniconda DOC: <a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">https://docs.conda.io/en/latest/miniconda.html</a></p>
-<p>本文使用的是最新版Python3.8 for Linux,从<a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">清华大学开源软件镜像站</a>下载</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>由于网络原因，使用默认配置下载Anaconda仓库与第三方源软件包时速度过慢，因此建议使用<a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">清华镜像</a><br>修改HOME目录下的.condarc文件(没有的话则新建)，添加如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">channel_alias: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda</span><br><span class="line">default_channels:</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;r</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;pro</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  msys2: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  bioconda: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  menpo: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  pytorch: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  simpleitk: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br></pre></td></tr></table></figure>
-<p>即可添加免费仓库.</p>
-<p>运行 conda clean -i 清除索引缓存，保证用的是镜像站提供的索引。<br>##测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br><span class="line">conda create -n testenv --clone base</span><br><span class="line">conda list env</span><br><span class="line">conda activate testenv</span><br><span class="line">conda install django</span><br><span class="line">conda list</span><br><span class="line">conda deactivate</span><br><span class="line">conda env remove -n testenv</span><br></pre></td></tr></table></figure>
+          <h2 id="二进制方式安装"><a href="#二进制方式安装" class="headerlink" title="二进制方式安装"></a>二进制方式安装</h2><h3 id="压缩包方式安装"><a href="#压缩包方式安装" class="headerlink" title="压缩包方式安装"></a>压缩包方式安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;Kitware&#x2F;CMake&#x2F;releases&#x2F;download&#x2F;v3.24.1&#x2F;cmake-3.24.1-linux-x86_64.tar.gz</span><br><span class="line">tar -zxvf cmake-3.24.1-linux-x86_64.tar.gz &amp;&amp; cd cmake-3.24.1-linux-x86_64</span><br><span class="line">sudo cp bin&#x2F;* &#x2F;usr&#x2F;bin&#x2F;</span><br><span class="line">sudo cp -r doc&#x2F; &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;aclocal &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;applications &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;bash-completion &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;cmake-3.24 &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;emacs &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;icons &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;mime &#x2F;usr&#x2F;share&#x2F;</span><br></pre></td></tr></table></figure>
+<h3 id="sh文件方式安装"><a href="#sh文件方式安装" class="headerlink" title="sh文件方式安装"></a>sh文件方式安装</h3><p>sh安装方式与压缩包方式相似，只是在解压过程中会有一些交互</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;Kitware&#x2F;CMake&#x2F;releases&#x2F;download&#x2F;v3.24.1&#x2F;cmake-3.24.1-linux-x86_64.sh</span><br><span class="line">sh cmake-3.24.1-linux-x86_64.sh</span><br><span class="line">sudo cp bin&#x2F;* &#x2F;usr&#x2F;bin&#x2F;</span><br><span class="line">sudo cp -r doc&#x2F; &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;aclocal &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;applications &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;bash-completion &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;cmake-3.24 &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;emacs &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;icons &#x2F;usr&#x2F;share&#x2F;</span><br><span class="line">sudo cp -r share&#x2F;mime &#x2F;usr&#x2F;share&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="源码编译方式安装"><a href="#源码编译方式安装" class="headerlink" title="源码编译方式安装"></a>源码编译方式安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;Kitware&#x2F;CMake&#x2F;releases&#x2F;download&#x2F;v3.24.1&#x2F;cmake-3.24.1.tar.gz</span><br><span class="line">tar -zxvf cmake-3.24.1.tar.gz &amp;&amp; cd cmake-3.24.1</span><br><span class="line">.&#x2F;bootstrap &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="镜像源方式安装"><a href="#镜像源方式安装" class="headerlink" title="镜像源方式安装"></a>镜像源方式安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -O - https:&#x2F;&#x2F;apt.kitware.com&#x2F;keys&#x2F;kitware-archive-latest.asc 2&gt;&#x2F;dev&#x2F;null | gpg --dearmor - | sudo tee &#x2F;usr&#x2F;share&#x2F;keyrings&#x2F;kitware-archive-keyring.gpg &gt;&#x2F;dev&#x2F;null</span><br><span class="line">echo &#39;deb [signed-by&#x3D;&#x2F;usr&#x2F;share&#x2F;keyrings&#x2F;kitware-archive-keyring.gpg] https:&#x2F;&#x2F;apt.kitware.com&#x2F;ubuntu&#x2F; bionic main&#39; | sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;kitware.list &gt;&#x2F;dev&#x2F;null</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install cmake</span><br></pre></td></tr></table></figure>
+<h2 id="pip方式安装"><a href="#pip方式安装" class="headerlink" title="pip方式安装"></a>pip方式安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cmake</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2022/08/15/Install-PostgreSQL-from-Source-Code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/15/Install-PostgreSQL-from-Source-Code/" class="post-title-link" itemprop="url">Install PostgreSQL from Source Code</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-15 13:16:30" itemprop="dateCreated datePublished" datetime="2022-08-15T13:16:30+08:00">2022-08-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>在编译之前需要依赖及编译器，参考<a href="https://www.postgresql.org/docs/current/install-requirements.html" target="_blank" rel="noopener">官网Requirements</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gcc make libreadline-dev zlib1g-dev openssl flex bison perl</span><br></pre></td></tr></table></figure>
+<p>如果需要生成文档，则需要额外安装以下依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install docbook-xml docbook-xsl fop libxml2-utils xsltproc</span><br></pre></td></tr></table></figure>
+<h2 id="获取源码"><a href="#获取源码" class="headerlink" title="获取源码"></a>获取源码</h2><h3 id="1-通过压缩包方式下载源码"><a href="#1-通过压缩包方式下载源码" class="headerlink" title="1. 通过压缩包方式下载源码"></a>1. 通过压缩包方式下载源码</h3><p>打开[<a href="https://www.postgresql.org/ftp/source/]，目前最新的版本为14.5，下载后解压" target="_blank" rel="noopener">https://www.postgresql.org/ftp/source/]，目前最新的版本为14.5，下载后解压</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf postgresql-14.5.tar.gz</span><br><span class="line">cd postgresql</span><br></pre></td></tr></table></figure>
+<h3 id="2-通过git方式拉取代码，并切换至稳定的分支"><a href="#2-通过git方式拉取代码，并切换至稳定的分支" class="headerlink" title="2. 通过git方式拉取代码，并切换至稳定的分支"></a>2. 通过git方式拉取代码，并切换至稳定的分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone http:&#x2F;&#x2F;git.postgresql.org&#x2F;git&#x2F;postgresql.git</span><br><span class="line">cd postgresql</span><br><span class="line">git checkout -b REL_14_STABLE origin&#x2F;REL_14_STABLE</span><br></pre></td></tr></table></figure>
+<h2 id="编译并安装"><a href="#编译并安装" class="headerlink" title="编译并安装"></a>编译并安装</h2><p>编译前需要指定安装目录，默认安装目录为/usr/local/pgsql/，可以通过设置编译参数–prefix指定安装目录，如${HOME}/pgsql。关于更多的编译参数可以参考<a href="https://www.postgresql.org/docs/current/install-procedure.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export PGHOME&#x3D;$&#123;HOME&#125;&#x2F;pgsql</span><br><span class="line">.&#x2F;configure --prefix&#x3D;$&#123;PGHOME&#125; --enable-tap-tests --enable-cassert --enable-debug</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export PGDATA&#x3D;$&#123;PGHOME&#125;&#x2F;pgdata</span><br><span class="line">export PATH&#x3D;$&#123;PGHOME&#125;&#x2F;bin:$PATH</span><br><span class="line">export LD_LIBRARY_PATH&#x3D;$&#123;PGHOME&#125;&#x2F;lib:$LD_LIBRARY_PATH</span><br><span class="line">cd $&#123;PGHOME&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="初始化及启动"><a href="#初始化及启动" class="headerlink" title="初始化及启动"></a>初始化及启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">initdb -D $PGDATA</span><br><span class="line">pg_ctl -D $PGDATA -l logfile start</span><br><span class="line">createdb test</span><br><span class="line">psql test</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -228,7 +300,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2020/07/21/github-proxy/">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2022/07/24/Configure-Linux-Firewall-iptables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -242,7 +314,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/21/github-proxy/" class="post-title-link" itemprop="url">github-proxy</a>
+            <a href="/2022/07/24/Configure-Linux-Firewall-iptables/" class="post-title-link" itemprop="url">Configure Linux Firewall iptables</a>
         </h2>
 
         <div class="post-meta">
@@ -252,14 +324,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-21 20:32:09" itemprop="dateCreated datePublished" datetime="2020-07-21T20:32:09+08:00">2020-07-21</time>
+              <time title="创建时间：2022-07-24 18:10:35" itemprop="dateCreated datePublished" datetime="2022-07-24T18:10:35+08:00">2022-07-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-30 11:46:11" itemprop="dateModified" datetime="2022-03-30T11:46:11+08:00">2022-03-30</time>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
               </span>
 
           
@@ -273,8 +345,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://www.gitclone.com/" target="_blank" rel="noopener">https://www.gitclone.com/</a></p>
-<p><a href="https://ghproxy.com/" target="_blank" rel="noopener">https://ghproxy.com/</a></p>
+          <h2 id="在Ubuntu系统上安装iptables"><a href="#在Ubuntu系统上安装iptables" class="headerlink" title="在Ubuntu系统上安装iptables"></a>在Ubuntu系统上安装iptables</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y iptables</span><br></pre></td></tr></table></figure>
+<h2 id="常用的参数选项"><a href="#常用的参数选项" class="headerlink" title="常用的参数选项"></a>常用的参数选项</h2><ul>
+<li>-A –append – Add a rule to a chain (at the end).</li>
+<li>-D –delete – Remove specified rules from a chain.</li>
+<li>-F –flush – Remove all rules.</li>
+<li>-I –insert – Add a rule to a chain at a given position.</li>
+<li>-L –list – Show all rules in a chain.</li>
+<li>-N -new-chain – Create a new chain.</li>
+<li>-v –verbose – Show more information when using a list option.</li>
+<li>-n –numeric – numeric output of addresses and ports</li>
+<li>–line-numbers – print line numbers when listing</li>
+<li>-p –protocol – protocol: by number or name, eg. `tcp’</li>
+<li>-s –source – source specification</li>
+<li>-d –destination – destination specification</li>
+<li>-j –jump – target for rule (may load target extension)<h2 id="显示已有的规则"><a href="#显示已有的规则" class="headerlink" title="显示已有的规则"></a>显示已有的规则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -L -n --line-number</span><br></pre></td></tr></table></figure>
+<h2 id="添加一条规则"><a href="#添加一条规则" class="headerlink" title="添加一条规则"></a>添加一条规则</h2>以下命令新增一条DOCKER链路规则，允许172.20.0.3访问172.20.0.2的TCP 2022端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -I DOCKER -s 172.20.0.3 -d 172.20.0.2 -p tcp --dport 2022 -j ACCEPT</span><br></pre></td></tr></table></figure>
+以下命令新增一条INPUT链路规则，禁止所有地址访问端口3306<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -I INPUT -p tcp --dport 3306 -j DROP</span><br></pre></td></tr></table></figure>
+<h2 id="删除规则"><a href="#删除规则" class="headerlink" title="删除规则"></a>删除规则</h2>以下命令删除INPUT链路中序号为1的规则<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -D INPUT 1</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -294,7 +383,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2020/07/21/How-To-Install-Nodejs-On-Ubuntu/">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2022/07/13/Useful-command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -308,7 +397,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/21/How-To-Install-Nodejs-On-Ubuntu/" class="post-title-link" itemprop="url">How To Install Node.js On Ubuntu</a>
+            <a href="/2022/07/13/Useful-command/" class="post-title-link" itemprop="url">Useful command</a>
         </h2>
 
         <div class="post-meta">
@@ -318,14 +407,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-21 20:13:56" itemprop="dateCreated datePublished" datetime="2020-07-21T20:13:56+08:00">2020-07-21</time>
+              <time title="创建时间：2022-07-13 14:10:56" itemprop="dateCreated datePublished" datetime="2022-07-13T14:10:56+08:00">2022-07-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-28 19:17:38" itemprop="dateModified" datetime="2021-10-28T19:17:38+08:00">2021-10-28</time>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
               </span>
 
           
@@ -339,9 +428,561 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Node-js-binary-distributions-are-available-from-NodeSource"><a href="#Node-js-binary-distributions-are-available-from-NodeSource" class="headerlink" title="Node.js binary distributions are available from NodeSource"></a>Node.js binary distributions are available from <a href="https://github.com/nodesource/distributions/blob/master/README.md" target="_blank" rel="noopener">NodeSource</a></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using Ubuntu</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
+          <p>kubectl get ns knative-serving  -o json &gt; knative-serving.json</p>
+<p>sudo vim knative-serving.json</p>
+<p>curl -H “Authorization: Bearer $TOKEN” -H “Content-Type:application/json” -X PUT –data-binary @knative-serving.json <a href="https://127.0.0.1:6443/api/v1/namespaces/knative-serving/finalize" target="_blank" rel="noopener">https://127.0.0.1:6443/api/v1/namespaces/knative-serving/finalize</a>  –insecure</p>
+<p>kubectl proxy –port=8081</p>
+<p>curl -k -H “Content-Type:application/json” -X PUT –data-binary @knative-serving.json <a href="http://127.0.0.1:8080/api/v1/namespaces/knative-serving/finalize" target="_blank" rel="noopener">http://127.0.0.1:8080/api/v1/namespaces/knative-serving/finalize</a></p>
+<p>curl  -H “Content-Type:application/json” -H “Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ik84RHlkUjZBTHpwQ2JUT0N6ajlMUUtGYnJQV3dZeU9aVEsyaklIeHJPVncifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWR3NHRmIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI5MTdhZTA4ZS04NWY3LTQ5ZjMtOTc2OC02NGM0NThlOTZiMTIiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.qCD-BCP_eVXj_KfDrta2jfFniQCu06rRJsk5H0W1jpOt2XAIDe7uadAT_hQA74wmc278-ASLS_sq_7VZ_lV9Qpm-NGyUXI4n1aIEg-Axc1yZK422i4_DlEO18IB7pjADLYD9bfeYgxR3QJeIAiRN9T_qZdHoubIJQQ6XzhAqzQhmq9aQXOHcez67EBuajpqMWAfTchfriO8Z3YUWvgXprltp0NOUc9enhF0-F3ZirV4w9pJn7uHXCgUJjBBYM2rDbJzcHOfnWr_2OAS6uy5I85biuH8zoJ8Xh7qlP_1CKsYIOt7_cVZnrGGKMSVIGtmzDGiLBaZKVDrreP5gGm_1DQ” -X PUT –data-binary @knative-serving.json  <a href="https://127.0.0.1:6443/api/v1/namespaces/knative-serving/finalize" target="_blank" rel="noopener">https://127.0.0.1:6443/api/v1/namespaces/knative-serving/finalize</a> –insecure</p>
+<p>curl -H “Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ik84RHlkUjZBTHpwQ2JUT0N6ajlMUUtGYnJQV3dZeU9aVEsyaklIeHJPVncifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWR3NHRmIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI5MTdhZTA4ZS04NWY3LTQ5ZjMtOTc2OC02NGM0NThlOTZiMTIiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.qCD-BCP_eVXj_KfDrta2jfFniQCu06rRJsk5H0W1jpOt2XAIDe7uadAT_hQA74wmc278-ASLS_sq_7VZ_lV9Qpm-NGyUXI4n1aIEg-Axc1yZK422i4_DlEO18IB7pjADLYD9bfeYgxR3QJeIAiRN9T_qZdHoubIJQQ6XzhAqzQhmq9aQXOHcez67EBuajpqMWAfTchfriO8Z3YUWvgXprltp0NOUc9enhF0-F3ZirV4w9pJn7uHXCgUJjBBYM2rDbJzcHOfnWr_2OAS6uy5I85biuH8zoJ8Xh7qlP_1CKsYIOt7_cVZnrGGKMSVIGtmzDGiLBaZKVDrreP5gGm_1DQ” <a href="https://127.0.0.1:6443/api/" target="_blank" rel="noopener">https://127.0.0.1:6443/api/</a></p>
+<p>kubectl describe secrets $(kubectl get secrets -n kube-system |grep admin |cut -f1 -d ‘ ‘) -n kube-system |grep -E ‘^token’ |cut -f2 -d’:’|tr -d ‘\t’|tr -d ‘ ‘</p>
+<p>TOKEN=$(kubectl describe secrets $(kubectl get secrets -n kube-system |grep admin |cut -f1 -d ‘ ‘) -n kube-system |grep -E ‘^token’ |cut -f2 -d’:’|tr -d ‘\t’|tr -d ‘ ‘)</p>
 
-<h3 id="Install-cnpm"><a href="#Install-cnpm" class="headerlink" title="Install cnpm"></a>Install cnpm</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cnpm -g --registry=https://r.npm.taobao.org</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2022/03/30/Setup-Go-Environment-on-Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/30/Setup-Go-Environment-on-Ubuntu/" class="post-title-link" itemprop="url">在Ubuntu上配置Go开发环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-30 10:54:57" itemprop="dateCreated datePublished" datetime="2022-03-30T10:54:57+08:00">2022-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Remove-any-previous-Go-installation"><a href="#Remove-any-previous-Go-installation" class="headerlink" title="Remove any previous Go installation"></a>Remove any previous Go installation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf &#x2F;usr&#x2F;local&#x2F;go</span><br></pre></td></tr></table></figure>
+<h2 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;golang.google.cn&#x2F;dl&#x2F;go1.18.linux-amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="Extract-the-archive"><a href="#Extract-the-archive" class="headerlink" title="Extract the archive"></a>Extract the archive</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf go1.18.linux-amd64.tar.gz -C &#x2F;usr&#x2F;local</span><br></pre></td></tr></table></figure>
+<h2 id="Create-GOPATH"><a href="#Create-GOPATH" class="headerlink" title="Create GOPATH"></a>Create GOPATH</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~&#x2F;workspace&#x2F;go&#x2F;bin ~&#x2F;workspace&#x2F;go&#x2F;src ~&#x2F;workspace&#x2F;go&#x2F;pkg</span><br></pre></td></tr></table></figure>
+<h2 id="Setup-go-env"><a href="#Setup-go-env" class="headerlink" title="Setup go env"></a>Setup go env</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo tee -a $HOME&#x2F;.bashrc &lt;&lt;-&#39;EOF&#39;</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export GOPATH&#x3D;~&#x2F;workspace&#x2F;go</span><br><span class="line">export GO111MODULE&#x3D;&quot;on&quot;</span><br><span class="line">export GOPROXY&#x3D;https:&#x2F;&#x2F;proxy.golang.com.cn,direct</span><br><span class="line">export PATH&#x3D;$PATH:$GOROOT&#x2F;bin:$GOPATH&#x2F;bin</span><br><span class="line">EOF</span><br><span class="line">source $HOME&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/12/24/Install-k8s-on-Ubuntu-18-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/24/Install-k8s-on-Ubuntu-18-04/" class="post-title-link" itemprop="url">Install K8S on Ubuntu 18.04</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-24 14:38:01" itemprop="dateCreated datePublished" datetime="2021-12-24T14:38:01+08:00">2021-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Config-all-nodes-environment"><a href="#Config-all-nodes-environment" class="headerlink" title="Config all nodes environment"></a>Config all nodes environment</h1><h2 id="Letting-iptables-see-bridged-traffic"><a href="#Letting-iptables-see-bridged-traffic" class="headerlink" title="Letting iptables see bridged traffic"></a>Letting iptables see bridged traffic</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | sudo tee &#x2F;etc&#x2F;modules-load.d&#x2F;k8s.conf</span><br><span class="line">br_netfilter</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF | sudo tee &#x2F;etc&#x2F;sysctl.d&#x2F;k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables &#x3D; 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables &#x3D; 1</span><br><span class="line">net.ipv4.ip_forward&#x3D;1</span><br><span class="line">EOF</span><br><span class="line">sudo sysctl --system</span><br></pre></td></tr></table></figure>
+<h2 id="Turn-off-firewall"><a href="#Turn-off-firewall" class="headerlink" title="Turn off firewall"></a>Turn off firewall</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop ufw</span><br><span class="line">sudo systemctl disable ufw</span><br></pre></td></tr></table></figure>
+<h2 id="Turn-off-swap"><a href="#Turn-off-swap" class="headerlink" title="Turn off swap"></a>Turn off swap</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff -a &amp;&amp; sudo sysctl -w vm.swappiness&#x3D;0</span><br><span class="line">sudo sed -ri &#39;&#x2F;^[^#]*swap&#x2F;s@^@#@&#39; &#x2F;etc&#x2F;fstab</span><br></pre></td></tr></table></figure>
+<h2 id="Install-docker"><a href="#Install-docker" class="headerlink" title="Install docker"></a>Install docker</h2><p>Please refer <a href="/2020/09/15/How-Install-Docker-and-Docker-Compose-On-Ubuntu/" title="How Install Docker and Docker Compose On Ubuntu">How Install Docker and Docker Compose On Ubuntu</a></p>
+<h2 id="Change-docker-cgroup-driver-to-“systemd”"><a href="#Change-docker-cgroup-driver-to-“systemd”" class="headerlink" title="Change docker cgroup driver to “systemd”"></a>Change docker cgroup driver to “systemd”</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br></pre></td></tr></table></figure>
+<p>Add content</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Restart-docker"><a href="#Restart-docker" class="headerlink" title="Restart docker"></a>Restart docker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker</span><br><span class="line">sudo systemctl enable docker</span><br></pre></td></tr></table></figure>
+<h2 id="Install-K8S"><a href="#Install-K8S" class="headerlink" title="Install K8S"></a>Install K8S</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -s https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;apt&#x2F;doc&#x2F;apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;kubernetes.list &lt;&lt;-&#39;EOF&#39;</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;apt kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y kubeadm kubectl kubelet</span><br></pre></td></tr></table></figure>
+<h1 id="Init-K8S-on-master"><a href="#Init-K8S-on-master" class="headerlink" title="Init K8S on master"></a>Init K8S on master</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo kubeadm init --image-repository registry.aliyuncs.com&#x2F;google_containers --pod-network-cidr&#x3D;10.244.0.0&#x2F;16</span><br></pre></td></tr></table></figure>
+<p>Once K8S initialize successfully, you will see output like this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p $HOME&#x2F;.kube</span><br><span class="line">  sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">  sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br><span class="line"></span><br><span class="line">Alternatively, if you are the root user, you can run:</span><br><span class="line"></span><br><span class="line">  export KUBECONFIG&#x3D;&#x2F;etc&#x2F;kubernetes&#x2F;admin.conf</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:</span><br><span class="line">  https:&#x2F;&#x2F;kubernetes.io&#x2F;docs&#x2F;concepts&#x2F;cluster-administration&#x2F;addons&#x2F;</span><br><span class="line"></span><br><span class="line">Then you can join any number of worker nodes by running the following on each as root:</span><br><span class="line"></span><br><span class="line">kubeadm join 192.168.2.8:6443 --token 8borel.phprbzxwjupl3cuy \</span><br><span class="line">	--discovery-token-ca-cert-hash sha256:c441bbee5846711e3c00260e6daebc31258fcf8b9dbf7bb7b8b3b2c10f6ffbdf</span><br></pre></td></tr></table></figure>
+<p>Create new token with the following command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm token create --print-join-command</span><br></pre></td></tr></table></figure>
+<p>Copy config file to HOME folder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br></pre></td></tr></table></figure>
+<h2 id="Install-flannel"><a href="#Install-flannel" class="headerlink" title="Install flannel"></a>Install flannel</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml -o kube-flannel.yaml</span><br><span class="line"></span><br><span class="line">kubectl apply -f kube-flannel.yaml</span><br></pre></td></tr></table></figure>
+<h2 id="Check-node-status"><a href="#Check-node-status" class="headerlink" title="Check node status"></a>Check node status</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes -o wide</span><br></pre></td></tr></table></figure>
+<h1 id="Add-nodes-to-cluster"><a href="#Add-nodes-to-cluster" class="headerlink" title="Add nodes to cluster"></a>Add nodes to cluster</h1><p>Run the command on worker node</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join 192.168.2.8:6443 --token 8borel.phprbzxwjupl3cuy \</span><br><span class="line">	--discovery-token-ca-cert-hash sha256:c441bbee5846711e3c00260e6daebc31258fcf8b9dbf7bb7b8b3b2c10f6ffbdf</span><br></pre></td></tr></table></figure>
+<h1 id="Config-GPU-node"><a href="#Config-GPU-node" class="headerlink" title="Config GPU node"></a>Config GPU node</h1><p>If your worker nodes are GPU servers, you should install nvidia-docker2 on it</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">distribution&#x3D;$(. &#x2F;etc&#x2F;os-release;echo $ID$VERSION_ID) \</span><br><span class="line">   &amp;&amp; curl -s -L https:&#x2F;&#x2F;nvidia.github.io&#x2F;nvidia-docker&#x2F;gpgkey | sudo apt-key add - \</span><br><span class="line">   &amp;&amp; curl -s -L https:&#x2F;&#x2F;nvidia.github.io&#x2F;nvidia-docker&#x2F;$distribution&#x2F;nvidia-docker.list | sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;nvidia-docker.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y nvidia-docker2</span><br></pre></td></tr></table></figure>
+<h2 id="Change-container-default-runtime"><a href="#Change-container-default-runtime" class="headerlink" title="Change container default runtime"></a>Change container default runtime</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br></pre></td></tr></table></figure>
+<p>Change default docker runtime to nvidia</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],</span><br><span class="line">    &quot;default-runtime&quot;: &quot;nvidia&quot;,</span><br><span class="line">    &quot;runtimes&quot;: &#123;</span><br><span class="line">        &quot;nvidia&quot;: &#123;</span><br><span class="line">            &quot;path&quot;: &quot;nvidia-container-runtime&quot;,</span><br><span class="line">            &quot;runtimeArgs&quot;: []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Restart docker service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h2 id="Install-nvidia-device-plugin-on-master"><a href="#Install-nvidia-device-plugin-on-master" class="headerlink" title="Install nvidia device plugin on master"></a>Install nvidia device plugin on master</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NVIDIA&#x2F;k8s-device-plugin&#x2F;master&#x2F;nvidia-device-plugin.yml -o nvidia-device-plugin.yml</span><br><span class="line">kubectl apply -f nvidia-device-plugin.yml</span><br></pre></td></tr></table></figure>
+<h2 id="Enable-kubectl-bash-completion-and-alias"><a href="#Enable-kubectl-bash-completion-and-alias" class="headerlink" title="Enable kubectl bash completion and alias"></a>Enable kubectl bash completion and alias</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source &lt;(kubectl completion bash)</span><br><span class="line">alias k&#x3D;kubectl</span><br></pre></td></tr></table></figure>
+<h2 id="Install-kubesphere"><a href="#Install-kubesphere" class="headerlink" title="Install kubesphere"></a>Install kubesphere</h2><p>```<br>kubectl apply -f <a href="https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml" target="_blank" rel="noopener">https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml</a></p>
+<p>kubectl apply -f <a href="https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml" target="_blank" rel="noopener">https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml</a><br>``</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/12/20/OPCDA-Automation-Interface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/20/OPCDA-Automation-Interface/" class="post-title-link" itemprop="url">OPC DA开发常用接口规范介绍-OPCDAAuto自动化接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-20 19:22:49" itemprop="dateCreated datePublished" datetime="2021-12-20T19:22:49+08:00">2021-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>OPCDA自动化接口是OPC基金会组织为了方便并统一OPCDA客户端开发而发布的一个接口协议集。自动化接口中共定义了6类对象：OPCServer对象、OPCBrowser对象、OPCGroups对象、OPCGroup对象、OPCItems对象、OPCItem对象, 接下来分别对这些对象的主要功能进行说明。</p>
+<h3 id="OPCServer对象"><a href="#OPCServer对象" class="headerlink" title="OPCServer对象"></a>OPCServer对象</h3><p>客户端可以通过OPCServer对象连接至OPC主机, 用于获取OPC主机信息、创建和操作Group与Item对象。OPCServer只有一个无参构造函数, 它的主要方法及使用如下：</p>
+<h4 id="GetOPCServers-object-Node"><a href="#GetOPCServers-object-Node" class="headerlink" title="GetOPCServers(object Node)"></a>GetOPCServers(object Node)</h4><p>获取到OPC主机上的OPC服务列表, 参数为空时默认会获取本机服务列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">string Host &#x3D; &quot;192.168.2.53&quot;;</span><br><span class="line">OPCServer LocalOpcServer &#x3D; new OPCServer(); &#x2F;&#x2F;OPCServer无参构造函数</span><br><span class="line">&#x2F;&#x2F;object ServerList &#x3D; LocalOpcServer.GetOPCServers(); &#x2F;&#x2F;获取本机服务列表</span><br><span class="line">&#x2F;&#x2F;object ServerList &#x3D; LocalOpcServer.GetOPCServers(null); &#x2F;&#x2F;获取本机服务列表</span><br><span class="line">Array ServerList &#x3D; LocalOpcServer.GetOPCServers(Host) as Array; &#x2F;&#x2F;获取主机192.168.1.2上的OPC服务列表</span><br><span class="line"></span><br><span class="line">foreach (string Server in ServerList)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(&quot;取得主机&#123;0&#125; OPC服务：&#123;1&#125;&quot;, Host, Server);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Connect-string-ProgID-object-Node"><a href="#Connect-string-ProgID-object-Node" class="headerlink" title="Connect(string ProgID, object Node)"></a>Connect(string ProgID, object Node)</h4><p>连接主机Node上Program ID为ProgID的OPC服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalOpcServer.Connect(ServerList.GetValue(1).ToString(), Host);</span><br></pre></td></tr></table></figure>
+<h4 id="QueryAvailableLocaleIDs"><a href="#QueryAvailableLocaleIDs" class="headerlink" title="QueryAvailableLocaleIDs()"></a>QueryAvailableLocaleIDs()</h4><p>获取OPC主机区域ID列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Array LocaleIDs &#x3D; LocalOpcServer.QueryAvailableLocaleIDs() as Array;</span><br><span class="line">for(int i &#x3D; 1; i &lt;&#x3D; LocaleIDs.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;QueryAvailableLocaleIDs result index[&#123;i&#125;] value&#x3D;&#123;LocaleIDs.GetValue(i)&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="QueryAvailableProperties-string-ItemID-out-int-Count-out-Array-PropertyIDs-out-Array-Descriptions-out-Array-DataTypes"><a href="#QueryAvailableProperties-string-ItemID-out-int-Count-out-Array-PropertyIDs-out-Array-Descriptions-out-Array-DataTypes" class="headerlink" title="QueryAvailableProperties(string ItemID, out int Count, out Array PropertyIDs, out Array Descriptions, out Array DataTypes)"></a>QueryAvailableProperties(string ItemID, out int Count, out Array PropertyIDs, out Array Descriptions, out Array DataTypes)</h4><p>获取ItemID对应的属性列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int Count;</span><br><span class="line">Array PropertyIDs;</span><br><span class="line">Array Descriptions;</span><br><span class="line">Array DataTypes;</span><br><span class="line">LocalOpcServer.QueryAvailableProperties(&quot;Random.Int4&quot;, out Count, out PropertyIDs, out Descriptions, out DataTypes);</span><br><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; PropertyIDs.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;QueryAvailableProperties result index[&#123;i&#125;] PropertyID&#x3D;&#123;PropertyIDs.GetValue(i)&#125; Description&#x3D;&#123;Descriptions.GetValue(i)&#125; DataType&#x3D;&#123;Descriptions.GetValue(i)&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="GetItemProperties-string-ItemID-int-Count-ref-Array-PropertyIDs-out-Array-PropertyValues-out-Array-Errors"><a href="#GetItemProperties-string-ItemID-int-Count-ref-Array-PropertyIDs-out-Array-PropertyValues-out-Array-Errors" class="headerlink" title="GetItemProperties(string ItemID, int Count, ref Array PropertyIDs, out Array PropertyValues, out Array Errors)"></a>GetItemProperties(string ItemID, int Count, ref Array PropertyIDs, out Array PropertyValues, out Array Errors)</h4><p>根据属性列表查询对应ItemID属性值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;int&gt; InPropertyIDs &#x3D; new List&lt;int&gt;();</span><br><span class="line">InPropertyIDs.Add(0); &#x2F;&#x2F;必须添加, 否则报错</span><br><span class="line">InPropertyIDs.Add(4);</span><br><span class="line">Array PropertyValues;</span><br><span class="line">Array Errors;</span><br><span class="line">LocalOpcServer.GetItemProperties(&quot;Random.Int4&quot;, 1, InPropertyIDs.ToArray(), out PropertyValues, out Errors);</span><br><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; PropertyValues.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;GetItemProperties result index[&#123;i&#125;] value&#x3D;&#123;PropertyValues.GetValue(i)&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="GetErrorString-int-ErrorCode"><a href="#GetErrorString-int-ErrorCode" class="headerlink" title="GetErrorString(int ErrorCode)"></a>GetErrorString(int ErrorCode)</h4><p>根据ErrorCode获取文字描述</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foreach (int error in Errors)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(LocalOpcServer.GetErrorString(error));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="CreateBrowser"><a href="#CreateBrowser" class="headerlink" title="CreateBrowser()"></a>CreateBrowser()</h4><p>创建OPCBrowser, 通过OPCBrowser对象可获得OPC服务器的节点信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPCBrowser LocalOPCbrowser &#x3D; LocalOpcServer.CreateBrowser();</span><br></pre></td></tr></table></figure>
+<h4 id="Disconnect"><a href="#Disconnect" class="headerlink" title="Disconnect()"></a>Disconnect()</h4><p>断开与OPC主机的连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalOpcServer.Disconnect();</span><br></pre></td></tr></table></figure>
+<p>完整示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">string Host &#x3D; &quot;192.168.2.53&quot;;</span><br><span class="line">OPCServer LocalOpcServer &#x3D; new OPCServer(); &#x2F;&#x2F;OPCServer无参构造函数</span><br><span class="line">&#x2F;&#x2F;object ServerList &#x3D; LocalOpcServer.GetOPCServers(); &#x2F;&#x2F;获取本机服务列表</span><br><span class="line">&#x2F;&#x2F;object ServerList &#x3D; LocalOpcServer.GetOPCServers(null); &#x2F;&#x2F;获取本机服务列表</span><br><span class="line">Array ServerList &#x3D; LocalOpcServer.GetOPCServers(Host) as Array; &#x2F;&#x2F;获取主机192.168.1.2上的OPC服务列表</span><br><span class="line"></span><br><span class="line">foreach (string Server in ServerList)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(&quot;取得主机&#123;0&#125; OPC服务：&#123;1&#125;&quot;, Host, Server);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">LocalOpcServer.Connect(ServerList.GetValue(1).ToString(), Host);</span><br><span class="line"></span><br><span class="line">Array LocaleIDs &#x3D; LocalOpcServer.QueryAvailableLocaleIDs() as Array;</span><br><span class="line">for(int i &#x3D; 1; i &lt;&#x3D; LocaleIDs.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;QueryAvailableLocaleIDs result index[&#123;i&#125;] value&#x3D;&#123;LocaleIDs.GetValue(i)&#125;&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int Count;</span><br><span class="line">Array PropertyIDs;</span><br><span class="line">Array Descriptions;</span><br><span class="line">Array DataTypes;</span><br><span class="line">LocalOpcServer.QueryAvailableProperties(&quot;Random.Int4&quot;, out Count, out PropertyIDs, out Descriptions, out DataTypes);</span><br><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; PropertyIDs.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;QueryAvailableProperties result index[&#123;i&#125;] PropertyID&#x3D;&#123;PropertyIDs.GetValue(i)&#125; Description&#x3D;&#123;Descriptions.GetValue(i)&#125; DataType&#x3D;&#123;Descriptions.GetValue(i)&#125;&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;int&gt; InPropertyIDs &#x3D; new List&lt;int&gt;();</span><br><span class="line">InPropertyIDs.Add(0); &#x2F;&#x2F;必须添加, 否则报错</span><br><span class="line">InPropertyIDs.Add(4);</span><br><span class="line">Array PropertyValues;</span><br><span class="line">Array Errors;</span><br><span class="line">LocalOpcServer.GetItemProperties(&quot;Random.Int4&quot;, 1, InPropertyIDs.ToArray(), out PropertyValues, out Errors);</span><br><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; PropertyValues.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;GetItemProperties result index[&#123;i&#125;] value&#x3D;&#123;PropertyValues.GetValue(i)&#125;&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; GetErrorString获取错误代码描述</span><br><span class="line">foreach (int error in Errors)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(LocalOpcServer.GetErrorString(error));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">OPCBrowser LocalOPCbrowser &#x3D; LocalOpcServer.CreateBrowser();</span><br><span class="line"></span><br><span class="line">LocalOpcServer.Disconnect();</span><br></pre></td></tr></table></figure>
+<h3 id="OPCBrowser对象"><a href="#OPCBrowser对象" class="headerlink" title="OPCBrowser对象"></a>OPCBrowser对象</h3><p>OPCBrowser是OPC Server用来存储分支和节点信息的树形结构, 常用方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void ShowBranches() \\获取当前分支的子分支</span><br><span class="line">void ShowLeafs(object Flat) \\获取叶子叶子节点, 当Flat&#x3D;True时, 会以扁平的方式返回当前分支下的所有节点信息(包含子节点)</span><br><span class="line">void MoveUp() \\向上移动一个层级</span><br><span class="line">void MoveToRoot() \\移动至树顶(根)</span><br><span class="line">void MoveDown(string Branch) \\向下移动至指定Branch分支</span><br><span class="line">string GetItemID(string Leaf) \\获取节点ID</span><br><span class="line">dynamic GetAccessPaths(string ItemID) \\获取节点的访问路径</span><br></pre></td></tr></table></figure>
+<p>构建树形结构的示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">OPCBrowser LocalOPCbrowser &#x3D; LocalOpcServer.CreateBrowser();</span><br><span class="line">ShowOpcTagsRecurcive(LocalOPCbrowser, &quot;&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;递归显示树形结构</span><br><span class="line">private static void ShowOpcTagsRecurcive(OPCBrowser Browser, string prefix)</span><br><span class="line">&#123;</span><br><span class="line">    Browser.ShowBranches();</span><br><span class="line"></span><br><span class="line">    foreach (string item in Browser)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine($&quot;&#123;prefix&#125; branch &#123;Browser.GetItemID(item)&#125;&quot;);</span><br><span class="line">        Browser.MoveDown(item.ToString());</span><br><span class="line">        ShowOpcTagsRecurcive(Browser, prefix + &quot;\t&quot;);</span><br><span class="line">        Browser.MoveUp();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Browser.ShowLeafs();</span><br><span class="line">    </span><br><span class="line">    foreach (string item in Browser)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        Console.WriteLine($&quot;&#123;prefix&#125; leaf &#123;Browser.GetItemID(item)&#125;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="OPCGroups对象"><a href="#OPCGroups对象" class="headerlink" title="OPCGroups对象"></a>OPCGroups对象</h3><p>OPCGroups是OPCGroup对象的集合, 通过OPCGroups可以获取、添加、删除OPCGroup对象, 另外还可以通过OPCGroups的属性对OPCGroup做一些默认设置。</p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OPCGroup Item(object ItemSpecifier) &#x2F;&#x2F;根据指定的参数获取OPCGroup</span><br><span class="line">OPCGroup Add(object Name) &#x2F;&#x2F;根据指定的名称添加OPCGroup</span><br><span class="line">OPCGroup GetOPCGroup(object ItemSpecifier) &#x2F;&#x2F;根据指定的参数获取OPCGroup</span><br><span class="line">void RemoveAll() &#x2F;&#x2F;移除所有OPCGroup</span><br><span class="line">void Remove(object ItemSpecifier) &#x2F;&#x2F;根据名称移除指定的OPCGroup</span><br></pre></td></tr></table></figure>
+<h4 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DefaultGroupIsActive &#x2F;&#x2F;默认是否激活</span><br><span class="line">DefaultGroupUpdateRate &#x2F;&#x2F;默认更新频率</span><br><span class="line">DefaultGroupDeadBand &#x2F;&#x2F;默认死区, 变化量超过死区后将会触发DataChange事件</span><br><span class="line">DefaultGroupTimeBias &#x2F;&#x2F;默认时间偏差</span><br></pre></td></tr></table></figure>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OPCGroups LocalGroups &#x3D; LocalOpcServer.OPCGroups;</span><br><span class="line">LocalGroups.DefaultGroupIsActive &#x3D; true;</span><br><span class="line">LocalGroups.DefaultGroupDeadband &#x3D; 0;</span><br><span class="line">LocalGroups.DefaultGroupUpdateRate &#x3D; 1000;</span><br><span class="line">LocalGroups.DefaultGroupTimeBias &#x3D; 5000;</span><br><span class="line"></span><br><span class="line">OPCGroup t &#x3D; LocalGroups.Add(&quot;Test&quot;);</span><br><span class="line">OPCGroup test &#x3D; LocalGroups.Item(&quot;Test&quot;);</span><br><span class="line">OPCGroup Test &#x3D; LocalGroups.GetOPCGroup(&quot;Test&quot;);</span><br><span class="line">LocalGroups.Remove(&quot;Test&quot;);</span><br><span class="line">LocalGroups.RemoveAll();</span><br></pre></td></tr></table></figure>
+<h3 id="OPCGroup对象"><a href="#OPCGroup对象" class="headerlink" title="OPCGroup对象"></a>OPCGroup对象</h3><p>OPCGroup对象是编程中最常用的对象之一, 它为客户端读写OPCItem提供了同步异步方法, 对于OPCGroups上设置的默认属性也提供了属性进行覆盖。由于对节点数据的读写涉及到OPCGroup、OPCItems和OPCItem, 所以示例代码将在介绍完OPCItem后一起提供。</p>
+<h4 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SyncRead(short Source, int NumItems, ref Array ServerHandles, out Array Values, out Array Errors, out object Qualities, out object TimeStamps) &#x2F;&#x2F;同步读方法, 其中参数Source只能是OPCAutomation.OPCDataSource.OPCCache或OPCAutomation.OPCDataSource.OPCDevice</span><br><span class="line"></span><br><span class="line">SyncWrite(int NumItems, ref Array ServerHandles, ref Array Values, out Array Errors) &#x2F;&#x2F;同步写方法</span><br><span class="line"></span><br><span class="line">AsyncRead(int NumItems, ref Array ServerHandles, out Array Errors, int TransactionID, out int CancelID) &#x2F;&#x2F;异步读方法</span><br><span class="line"></span><br><span class="line">AsyncWrite(int NumItems, ref Array ServerHandles, ref Array Values, out Array Errors, int TransactionID, out int CancelID) &#x2F;&#x2F;异步写方法</span><br><span class="line"></span><br><span class="line">AsyncRefresh(short Source, int TransactionID, out int CancelID) &#x2F;&#x2F;异步刷新, 其中参数Source只能是OPCAutomation.OPCDataSource.OPCCache或OPCAutomation.OPCDataSource.OPCDevice</span><br><span class="line"></span><br><span class="line">AsyncCancel(int CancelID) &#x2F;&#x2F;异步取消</span><br></pre></td></tr></table></figure>
+<h4 id="常用属性-1"><a href="#常用属性-1" class="headerlink" title="常用属性"></a>常用属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Name &#x2F;&#x2F;获取OPCGroup名称</span><br><span class="line">IsPublic &#x2F;&#x2F;是否为Public</span><br><span class="line">IsActive &#x2F;&#x2F;是否激活</span><br><span class="line">IsSubscribed &#x2F;&#x2F;是否订阅, 设置为true时才会触发DataChange事件</span><br><span class="line">ClientHandle &#x2F;&#x2F;客户端句柄</span><br><span class="line">ServerHandle &#x2F;&#x2F;服务端句柄</span><br><span class="line">TimeBias &#x2F;&#x2F;时间偏移, 对应OPCGroups对象的DefaultGroupDeadBand</span><br><span class="line">DeadBand &#x2F;&#x2F;死区, 对应OPCGroups对象的DefaultGroupDeadBand</span><br><span class="line">UpdateRate &#x2F;&#x2F;更新频率, 对应OPCGroups对象的DefaultGroupUpdateRate</span><br><span class="line">OPCItems &#x2F;&#x2F;获取OPCItems对象</span><br></pre></td></tr></table></figure>
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DataChange &#x2F;&#x2F;数据变化事件, 当组内任何OPCItem数据或数据质量发生变化时会触发此事件</span><br><span class="line">AsyncReadComplete &#x2F;&#x2F;异步读结束事件, 对应AsyncRead方法</span><br><span class="line">AsyncWriteComplete &#x2F;&#x2F;异步写结束事件, 对应AsyncWrite方法</span><br><span class="line">AsyncCancelComplete &#x2F;&#x2F;异步取消结束事件, 对应AsyncCancel方法</span><br></pre></td></tr></table></figure>
+<h3 id="OPCItems对象"><a href="#OPCItems对象" class="headerlink" title="OPCItems对象"></a>OPCItems对象</h3><p>OPCItems对象也是编程中最常用的对象之一, 它提供了添加和删除OPCItem对象的接口。</p>
+<h4 id="常用方法-2"><a href="#常用方法-2" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Item(object ItemSpecifier) &#x2F;&#x2F;根据名称获取OPCItem对象</span><br><span class="line"></span><br><span class="line">OPCItem GetOPCItem(int ServerHandle) &#x2F;&#x2F;根据ServerHandle获取OPCItem对象</span><br><span class="line"></span><br><span class="line">OPCItem AddItem(string ItemID, int ClientHandle) &#x2F;&#x2F;添加OPCItem对象</span><br><span class="line"></span><br><span class="line">AddItems(int NumItems, ref Array ItemIDs, ref Array ClientHandles, out Array ServerHandles, out Array Errors, object RequestedDataTypes, object AccessPaths) &#x2F;&#x2F;批量添加OPCItem对象</span><br><span class="line"></span><br><span class="line">Remove(int NumItems, ref Array ServerHandles, out Array Errors) &#x2F;&#x2F;批量移除OPCItem对象</span><br></pre></td></tr></table></figure>
+<h4 id="常用属性-2"><a href="#常用属性-2" class="headerlink" title="常用属性"></a>常用属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Count &#x2F;&#x2F;获取OPCItems对象所拥有的OPCItem数量</span><br></pre></td></tr></table></figure>
+<h3 id="OPCItem对象"><a href="#OPCItem对象" class="headerlink" title="OPCItem对象"></a>OPCItem对象</h3><p>OPCItem为服务端存储的数据的载体, 它包含节点的值, 数据通信质量及时间戳。</p>
+<h4 id="常用方法-3"><a href="#常用方法-3" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Read(short Source, out object Value, out object Quality, out object TimeStamp) \\读取数据</span><br><span class="line">void Write(object Value) &#x2F;&#x2F;写值</span><br></pre></td></tr></table></figure>
+<h4 id="常用属性-3"><a href="#常用属性-3" class="headerlink" title="常用属性"></a>常用属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ClientHandle &#x2F;&#x2F;客户端句柄</span><br><span class="line">ServerHandle &#x2F;&#x2F;服务端句柄</span><br><span class="line">AccessPath &#x2F;&#x2F;访问路径</span><br><span class="line">ItemID &#x2F;&#x2F;ID</span><br><span class="line">Value &#x2F;&#x2F;值</span><br><span class="line">Quality &#x2F;&#x2F;数据质量</span><br><span class="line">TimeStamp &#x2F;&#x2F;更新时间戳</span><br></pre></td></tr></table></figure>
+<h4 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><span class="line">OPCGroup LocalGroup &#x3D; LocalGroups.Add(&quot;LocalGroups&quot;);</span><br><span class="line">LocalGroup.IsActive &#x3D; true;</span><br><span class="line">LocalGroup.IsSubscribed &#x3D; true;</span><br><span class="line">LocalGroup.UpdateRate &#x3D; 10000; &#x2F;&#x2F;每十秒刷新一次</span><br><span class="line">LocalGroup.DataChange +&#x3D; Group_DataChange; &#x2F;&#x2F;事件</span><br><span class="line">LocalGroup.AsyncWriteComplete +&#x3D; LocalGroup_AsyncWriteComplete; &#x2F;&#x2F;数据变化事件</span><br><span class="line">LocalGroup.AsyncReadComplete +&#x3D; LocalGroup_AsyncReadComplete; &#x2F;&#x2F;异步读结束事件</span><br><span class="line"></span><br><span class="line">ClientHandleItemIDPairs.Add(0, &quot;&quot;);</span><br><span class="line">ClientHandleItemIDPairs.Add(1, &quot;Random.Int4&quot;);</span><br><span class="line">ClientHandleItemIDPairs.Add(2, &quot;Random.Int2&quot;);</span><br><span class="line"></span><br><span class="line">try</span><br><span class="line">&#123;</span><br><span class="line">    Array ServerHandles;</span><br><span class="line">    Array Errors;</span><br><span class="line">    int CancelID;</span><br><span class="line">    &#x2F;&#x2F;批量添加监控节点</span><br><span class="line">    LocalGroup.OPCItems.AddItems(2, ClientHandleItemIDPairs.Values.ToArray(), ClientHandleItemIDPairs.Keys.ToArray(), out ServerHandles, out Errors);</span><br><span class="line">    &#x2F;&#x2F;添加单个监控节点</span><br><span class="line">    OPCItem SingleItem &#x3D; LocalGroup.OPCItems.AddItem(&quot;Write Only.String&quot;, 3);</span><br><span class="line">    ClientHandleItemIDPairs.Add(3, &quot;Write Only.String&quot;);</span><br><span class="line"></span><br><span class="line">    for (int i &#x3D; 1; i &lt;&#x3D; ServerHandles.Length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine($&quot;Added Item: &#123;LocalGroup.OPCItems.GetOPCItem((int)ServerHandles.GetValue(i)).ItemID&#125;, Error: &#123;LocalOpcServer.GetErrorString((int)Errors.GetValue(i))&#125;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Array outValues;</span><br><span class="line">    object outQualities;</span><br><span class="line">    object outTimestamps;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F;同步读</span><br><span class="line">    LocalGroup.SyncRead((short)OPCAutomation.OPCDataSource.OPCDevice, ServerHandles.Length, ServerHandles, out outValues, out Errors, out outQualities, out outTimestamps);</span><br><span class="line">    for (int i &#x3D; 1; i &lt;&#x3D; ServerHandles.Length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        Console.WriteLine($&quot;SyncRead Item &#123;LocalGroup.OPCItems.GetOPCItem((int)ServerHandles.GetValue(i)).ItemID&#125; Value: &#123;outValues.GetValue(i)&#125;, Quality: &#123;(outQualities as Array).GetValue(i)&#125;, Timestamp: &#123;(outTimestamps as Array).GetValue(i)&#125;, Error: &#123;LocalOpcServer.GetErrorString((int)Errors.GetValue(i))&#125;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;此处添加的0和&quot;&quot;是必须的，否则出错!</span><br><span class="line">    int[] WriteServerHandles &#x3D; new[] &#123; 0, SingleItem.ServerHandle &#125;;</span><br><span class="line">    object[] WriteValues &#x3D; new object[] &#123; &quot;&quot;, &quot;Hello&quot; &#125;;</span><br><span class="line">    &#x2F;&#x2F;同步写</span><br><span class="line">    LocalGroup.SyncWrite(1, WriteServerHandles.ToArray(), WriteValues, out Errors);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;异步读, TransactionID &#x3D;&#x3D; 1</span><br><span class="line">    LocalGroup.AsyncRead(ServerHandles.Length, ServerHandles, out Errors, 1, out CancelID);</span><br><span class="line">    &#x2F;&#x2F;异步写, TransactionID &#x3D;&#x3D; 2</span><br><span class="line">    LocalGroup.AsyncWrite(1, WriteServerHandles.ToArray(), WriteValues, out Errors, 2, out CancelID);</span><br><span class="line">    &#x2F;&#x2F;异步刷新, TransactionID &#x3D;&#x3D; 3</span><br><span class="line">    LocalGroup.AsyncRefresh((short)OPCAutomation.OPCDataSource.OPCDevice, 3, out CancelID);</span><br><span class="line">&#125;</span><br><span class="line">catch (Exception ex)</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    MessageBox.Show($&quot;错误信息&#123;ex.Message&#125; &#123;ex.StackTrace&#125;&quot;, &quot;错误&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void LocalGroup_AsyncWriteComplete(int TransactionID, int NumItems, ref Array ClientHandles, ref Array Errors)</span><br><span class="line">&#123;</span><br><span class="line">    if (TransactionID &#x3D;&#x3D; 2)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; NumItems; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine($&quot;Async Write &#123;ClientHandleItemIDPairs[(int)ClientHandles.GetValue(i)]&#125; Complete, Error: &#123;LocalOpcServer.GetErrorString((int)Errors.GetValue(i))&#125;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void LocalGroup_AsyncReadComplete(int TransactionID, int NumItems, ref Array ClientHandles, ref Array ItemValues, ref Array Qualities, ref Array TimeStamps, ref Array Errors)</span><br><span class="line">&#123;</span><br><span class="line">    if (TransactionID &#x3D;&#x3D; 1)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; NumItems; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine($&quot;Async Read &#123;ClientHandleItemIDPairs[(int)ClientHandles.GetValue(i)]&#125; Complete, Value: &#123;ItemValues.GetValue(i)&#125;, Quality: &#123;GetQualityString((int)Qualities.GetValue(i))&#125;, TimeStamps: &#123;((DateTime)TimeStamps.GetValue(i)).ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;)&#125;, Error: &#123;LocalOpcServer.GetErrorString((int)Errors.GetValue(i))&#125;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void Group_DataChange(int TransactionID, int NumItems, ref Array ClientHandles, ref Array ItemValues, ref Array Qualities, ref Array TimeStamps)</span><br><span class="line">&#123;</span><br><span class="line">    for (int i &#x3D; 1; i &lt;&#x3D; NumItems; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine($&quot;DataChange &#123;ClientHandleItemIDPairs[(int)ClientHandles.GetValue(i)]&#125; Complete, Value: &#123;ItemValues.GetValue(i)&#125;, Quality: &#123;GetQualityString((int)Qualities.GetValue(i))&#125;, TimeStamps: &#123;((DateTime)TimeStamps.GetValue(i)).ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;)&#125;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static string GetQualityString(int QualityCode)</span><br><span class="line">&#123;</span><br><span class="line">    switch (QualityCode)</span><br><span class="line">    &#123;</span><br><span class="line">        case 0: return &quot;Bad&quot;;</span><br><span class="line">        case 1: return &quot;Bad, Low Limited&quot;;</span><br><span class="line">        case 2: return &quot;Bad, High Limited&quot;;</span><br><span class="line">        case 3: return &quot;Bad, Constant&quot;;</span><br><span class="line">        case 4: return &quot;Bad, Configuration Error&quot;;</span><br><span class="line">        case 5: return &quot;Bad, Configuration Error, Low Limited&quot;;</span><br><span class="line">        case 6: return &quot;Bad, Configuration Error, High Limited&quot;;</span><br><span class="line">        case 7: return &quot;Bad, Configuration Error, Constant&quot;;</span><br><span class="line">        case 8: return &quot;Bad, Not Connected&quot;;</span><br><span class="line">        case 9: return &quot;Bad, Not Connected, Low Limited&quot;;</span><br><span class="line">        case 10: return &quot;Bad, Not Connected, High Limited&quot;;</span><br><span class="line">        case 11: return &quot;Bad, Not Connected, Constant&quot;;</span><br><span class="line">        case 12: return &quot;Bad, Device Failure&quot;;</span><br><span class="line">        case 13: return &quot;Bad, Device Failure, Low Limited&quot;;</span><br><span class="line">        case 14: return &quot;Bad, Device Failure, High Limited&quot;;</span><br><span class="line">        case 15: return &quot;Bad, Device Failure, Constant&quot;;</span><br><span class="line">        case 16: return &quot;Bad, Sensor Failure&quot;;</span><br><span class="line">        case 17: return &quot;Bad, Sensor Failure, Low Limited&quot;;</span><br><span class="line">        case 18: return &quot;Bad, Sensor Failure, High Limited&quot;;</span><br><span class="line">        case 19: return &quot;Bad, Sensor Failure, Constant&quot;;</span><br><span class="line">        case 20: return &quot;Bad, Last Known Value&quot;;</span><br><span class="line">        case 21: return &quot;Bad, Last Known Value, Low Limited&quot;;</span><br><span class="line">        case 22: return &quot;Bad, Last Known Value, High Limited&quot;;</span><br><span class="line">        case 23: return &quot;Bad, Last Known Value, Constant&quot;;</span><br><span class="line">        case 24: return &quot;Bad, Comm Failure&quot;;</span><br><span class="line">        case 25: return &quot;Bad, Comm Failure, Low Limited&quot;;</span><br><span class="line">        case 26: return &quot;Bad, Comm Failure, High Limited&quot;;</span><br><span class="line">        case 27: return &quot;Bad, Comm Failure, Constant&quot;;</span><br><span class="line">        case 28: return &quot;Bad, Out of Service&quot;;</span><br><span class="line">        case 29: return &quot;Bad, Out of Service, Low Limited&quot;;</span><br><span class="line">        case 30: return &quot;Bad, Out of Service, High Limited&quot;;</span><br><span class="line">        case 31: return &quot;Bad, Out of Service, Constant&quot;;</span><br><span class="line">        case 32: return &quot;Bad, Waiting for Initial Data&quot;;</span><br><span class="line">        case 33: return &quot;Bad, Waiting for Initial Data, Low Limited&quot;;</span><br><span class="line">        case 34: return &quot;Bad, Waiting for Initial Data, High Limited&quot;;</span><br><span class="line">        case 35: return &quot;Bad, Waiting for Initial Data, Constant&quot;;</span><br><span class="line">        case 64: return &quot;Uncertain&quot;;</span><br><span class="line">        case 65: return &quot;Uncertain, Low Limited&quot;;</span><br><span class="line">        case 66: return &quot;Uncertain, High Limited&quot;;</span><br><span class="line">        case 67: return &quot;Uncertain, Constant&quot;;</span><br><span class="line">        case 68: return &quot;Uncertain, Last Usable Value&quot;;</span><br><span class="line">        case 69: return &quot;Uncertain, Last Usable Value, Low Limited&quot;;</span><br><span class="line">        case 70: return &quot;Uncertain, Last Usable Value, High Limited&quot;;</span><br><span class="line">        case 71: return &quot;Uncertain, Last Usable Value, Constant&quot;;</span><br><span class="line">        case 80: return &quot;Uncertain, Sensor Not Accurate&quot;;</span><br><span class="line">        case 81: return &quot;Uncertain, Sensor Not Accurate, Low Limited&quot;;</span><br><span class="line">        case 82: return &quot;Uncertain, Sensor Not Accurate, High Limited&quot;;</span><br><span class="line">        case 83: return &quot;Uncertain, Sensor Not Accurate, Constant&quot;;</span><br><span class="line">        case 84: return &quot;Uncertain, Engineering Units Exceeded&quot;;</span><br><span class="line">        case 85: return &quot;Uncertain, Engineering Units Exceeded, Low Limited&quot;;</span><br><span class="line">        case 86: return &quot;Uncertain, Engineering Units Exceeded, High Limited&quot;;</span><br><span class="line">        case 87: return &quot;Uncertain, Engineering Units Exceeded, Constant&quot;;</span><br><span class="line">        case 88: return &quot;Uncertain, Sub-Normal&quot;;</span><br><span class="line">        case 89: return &quot;Uncertain, Sub-Normal, Low Limited&quot;;</span><br><span class="line">        case 90: return &quot;Uncertain, Sub-Normal, High Limited&quot;;</span><br><span class="line">        case 91: return &quot;Uncertain, Sub-Normal, Constant&quot;;</span><br><span class="line">        case 192: return &quot;Good&quot;;</span><br><span class="line">        case 193: return &quot;Good, Low Limited&quot;;</span><br><span class="line">        case 194: return &quot;Good, High Limited&quot;;</span><br><span class="line">        case 195: return &quot;Good, Constant&quot;;</span><br><span class="line">        case 216: return &quot;Good, Local Override&quot;;</span><br><span class="line">        case 217: return &quot;Good, Local Override, Low Limited&quot;;</span><br><span class="line">        case 218: return &quot;Good, Local Override, High Limited&quot;;</span><br><span class="line">        case 219: return &quot;Good, Local Override, Constant&quot;;</span><br><span class="line">        default:</span><br><span class="line">            return &quot;INVALIDE QUALITY CODE!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/12/01/Kafka-Distributed-Connect-Start-Process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/01/Kafka-Distributed-Connect-Start-Process/" class="post-title-link" itemprop="url">Kafka Distributed Connect启动过程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-01 07:52:00" itemprop="dateCreated datePublished" datetime="2021-12-01T07:52:00+08:00">2021-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="加载Plugin"><a href="#加载Plugin" class="headerlink" title="加载Plugin"></a>加载Plugin</h2><p>调用Plugins构造函数初始化Plugins对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plugins plugins &#x3D; new Plugins(workerProps);</span><br></pre></td></tr></table></figure>
+<p>在构造函数中会获取plugin.path的配置信息作为插件的加载目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; pluginLocations &#x3D; WorkerConfig.pluginLocations(props);</span><br><span class="line">public static List&lt;String&gt; pluginLocations(Map&lt;String, String&gt; props) &#123;</span><br><span class="line">    String locationList &#x3D; props.get(WorkerConfig.PLUGIN_PATH_CONFIG);</span><br><span class="line">    return locationList &#x3D;&#x3D; null</span><br><span class="line">                         ? new ArrayList&lt;String&gt;()</span><br><span class="line">                         : Arrays.asList(COMMA_WITH_WHITESPACE.split(locationList.trim(), -1));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来会用上面取得的路径信息初始化DelegatingClassLoader，并调用initLoaders方法加载Plugins</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delegatingLoader &#x3D; newDelegatingClassLoader(pluginLocations);</span><br><span class="line">delegatingLoader.initLoaders();</span><br></pre></td></tr></table></figure>
+<p>在initLoaders中首先调用initPluginLoader来初始化PluginLoader，然后调用addAllAliases为Plugin添加别名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (String configPath : pluginPaths) &#123;</span><br><span class="line">    initPluginLoader(configPath);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; Finally add parent&#x2F;system loader.</span><br><span class="line">initPluginLoader(CLASSPATH_NAME);</span><br><span class="line">addAllAliases();</span><br></pre></td></tr></table></figure>
+<p>在方法initPluginLoader中对非CLASSPATH_NAME路径首先调用registerPlugin初始化PluginClassLoader，后续处理逻辑与对CLASSPATH_NAME路径的处理逻辑相同。调用过程为通过scanUrlsAndAddPlugins-&gt;scanPluginPath-&gt;getPluginDesc和getServiceLoaderPluginDesc取得路径中的Connector, Converter, HeaderConverter, Transformation, ConfigProvider, ConnectRestExtension, ConnectorClientConfigOverridePolicy等类或接口的实现类，然后通过scanUrlsAndAddPlugins-&gt;loadJdbcDrivers加载JDBC驱动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">private void scanUrlsAndAddPlugins(</span><br><span class="line">        ClassLoader loader,</span><br><span class="line">        URL[] urls,</span><br><span class="line">        Path pluginLocation</span><br><span class="line">) throws InstantiationException, IllegalAccessException &#123;</span><br><span class="line">    PluginScanResult plugins &#x3D; scanPluginPath(loader, urls);</span><br><span class="line">    log.info(&quot;Registered loader: &#123;&#125;&quot;, loader);</span><br><span class="line">    if (!plugins.isEmpty()) &#123;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;加载JDBC驱动</span><br><span class="line">    loadJdbcDrivers(loader);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private PluginScanResult scanPluginPath(</span><br><span class="line">            ClassLoader loader,</span><br><span class="line">            URL[] urls</span><br><span class="line">) throws InstantiationException, IllegalAccessException &#123;</span><br><span class="line">    ConfigurationBuilder builder &#x3D; new ConfigurationBuilder();</span><br><span class="line">    builder.setClassLoaders(new ClassLoader[]&#123;loader&#125;);</span><br><span class="line">    builder.addUrls(urls);</span><br><span class="line">    builder.setScanners(new SubTypesScanner());</span><br><span class="line">    builder.useParallelExecutor();</span><br><span class="line">    Reflections reflections &#x3D; new InternalReflections(builder);</span><br><span class="line"></span><br><span class="line">    return new PluginScanResult(</span><br><span class="line">            getPluginDesc(reflections, Connector.class, loader),</span><br><span class="line">            getPluginDesc(reflections, Converter.class, loader),</span><br><span class="line">            getPluginDesc(reflections, HeaderConverter.class, loader),</span><br><span class="line">            getPluginDesc(reflections, Transformation.class, loader),</span><br><span class="line">            getServiceLoaderPluginDesc(ConfigProvider.class, loader),</span><br><span class="line">            getServiceLoaderPluginDesc(ConnectRestExtension.class, loader),</span><br><span class="line">            getServiceLoaderPluginDesc(ConnectorClientConfigOverridePolicy.class, loader)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private &lt;T&gt; Collection&lt;PluginDesc&lt;T&gt;&gt; getPluginDesc(</span><br><span class="line">            Reflections reflections,</span><br><span class="line">            Class&lt;T&gt; klass,</span><br><span class="line">            ClassLoader loader</span><br><span class="line">) throws InstantiationException, IllegalAccessException &#123;</span><br><span class="line">    Set&lt;Class&lt;? extends T&gt;&gt; plugins;</span><br><span class="line">    try &#123;</span><br><span class="line">        plugins &#x3D; reflections.getSubTypesOf(klass);</span><br><span class="line">    &#125; catch (ReflectionsException e) &#123;</span><br><span class="line">        log.debug(&quot;Reflections scanner could not find any classes for URLs: &quot; +</span><br><span class="line">                reflections.getConfiguration().getUrls(), e);</span><br><span class="line">        return Collections.emptyList();</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private &lt;T&gt; Collection&lt;PluginDesc&lt;T&gt;&gt; getServiceLoaderPluginDesc(Class&lt;T&gt; klass, ClassLoader loader) &#123;</span><br><span class="line">    ClassLoader savedLoader &#x3D; Plugins.compareAndSwapLoaders(loader);</span><br><span class="line">    Collection&lt;PluginDesc&lt;T&gt;&gt; result &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    try &#123;</span><br><span class="line">        ServiceLoader&lt;T&gt; serviceLoader &#x3D; ServiceLoader.load(klass, loader);</span><br><span class="line">        for (T pluginImpl : serviceLoader) &#123;</span><br><span class="line">            result.add(new PluginDesc&lt;&gt;((Class&lt;? extends T&gt;) pluginImpl.getClass(),</span><br><span class="line">                versionFor(pluginImpl), loader));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        Plugins.compareAndSwapLoaders(savedLoader);</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实例化Config"><a href="#实例化Config" class="headerlink" title="实例化Config"></a>实例化Config</h2><p>Config加载的逻辑相对简单的多，最终是通过ConfigDef.parse将传入的Map转换成匹配的键值对。</p>
+<h2 id="Cluster-ID"><a href="#Cluster-ID" class="headerlink" title="Cluster ID"></a>Cluster ID</h2><p>ClusterId的获取过程是首先通过KafkaAdminClient.createInternal方法生成KafkaAdminClient对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Admin adminClient &#x3D; Admin.create(config.originals())</span><br><span class="line"></span><br><span class="line">static Admin create(Map&lt;String, Object&gt; conf) &#123;</span><br><span class="line">    return KafkaAdminClient.createInternal(new AdminClientConfig(conf, true), null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后调用KafkaAdminClient.describeCluster().clusterId()方法取得ClusterId, 具体的逻辑是在处理Kafka响应的回调函数里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void handleResponse(AbstractResponse abstractResponse) &#123;</span><br><span class="line">    MetadataResponse response &#x3D; (MetadataResponse) abstractResponse;</span><br><span class="line">    describeClusterFuture.complete(response.brokers());</span><br><span class="line">    controllerFuture.complete(controller(response));</span><br><span class="line">    clusterIdFuture.complete(response.clusterId());</span><br><span class="line">    authorizedOperationsFuture.complete(</span><br><span class="line">            validAclOperations(response.clusterAuthorizedOperations()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Rest初始化"><a href="#Rest初始化" class="headerlink" title="Rest初始化"></a>Rest初始化</h2><p>首先将Config传入RestServer的构造函数，根据配置信息取得hostname和port生成listener地址，取得配置中的adminListener地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RestServer rest &#x3D; new RestServer(config);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;RestServer构造函数</span><br><span class="line">List&lt;String&gt; listeners &#x3D; parseListeners();</span><br><span class="line">List&lt;String&gt; adminListeners &#x3D; config.getList(WorkerConfig.ADMIN_LISTENERS_CONFIG);</span><br></pre></td></tr></table></figure>
+<p>其次生成Jetty Server对象和ContextHandler</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jettyServer &#x3D; new Server();</span><br><span class="line">handlers &#x3D; new ContextHandlerCollection();</span><br></pre></td></tr></table></figure>
+<p>然后根据listener和adminListener生成Connector对象添加到Jetty Server中。如果协议使用的是HTTPS，则会根据配置信息生成SSL/TLS，如果配置信息不包含SSL信息则生成默认的SSL/TLS。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">createConnectors(listeners, adminListeners);</span><br><span class="line"></span><br><span class="line">public Connector createConnector(String listener, boolean isAdmin) &#123;</span><br><span class="line">    Matcher listenerMatcher &#x3D; LISTENER_PATTERN.matcher(listener);</span><br><span class="line"></span><br><span class="line">    if (!listenerMatcher.matches())</span><br><span class="line">        throw new ConfigException(&quot;Listener doesn&#39;t have the right format (protocol:&#x2F;&#x2F;hostname:port).&quot;);</span><br><span class="line"></span><br><span class="line">    String protocol &#x3D; listenerMatcher.group(1).toLowerCase(Locale.ENGLISH);</span><br><span class="line"></span><br><span class="line">    if (!PROTOCOL_HTTP.equals(protocol) &amp;&amp; !PROTOCOL_HTTPS.equals(protocol))</span><br><span class="line">        throw new ConfigException(String.format(&quot;Listener protocol must be either \&quot;%s\&quot; or \&quot;%s\&quot;.&quot;, PROTOCOL_HTTP, PROTOCOL_HTTPS));</span><br><span class="line"></span><br><span class="line">    String hostname &#x3D; listenerMatcher.group(2);</span><br><span class="line">    int port &#x3D; Integer.parseInt(listenerMatcher.group(3));</span><br><span class="line"></span><br><span class="line">    ServerConnector connector;</span><br><span class="line"></span><br><span class="line">    if (PROTOCOL_HTTPS.equals(protocol)) &#123;</span><br><span class="line">        SslContextFactory ssl;</span><br><span class="line">        if (isAdmin) &#123;</span><br><span class="line">            ssl &#x3D; SSLUtils.createServerSideSslContextFactory(config, ADMIN_LISTENERS_HTTPS_CONFIGS_PREFIX);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            ssl &#x3D; SSLUtils.createServerSideSslContextFactory(config);</span><br><span class="line">        &#125;</span><br><span class="line">        connector &#x3D; new ServerConnector(jettyServer, ssl);</span><br><span class="line">        if (!isAdmin) &#123;</span><br><span class="line">            connector.setName(String.format(&quot;%s_%s%d&quot;, PROTOCOL_HTTPS, hostname, port));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        connector &#x3D; new ServerConnector(jettyServer);</span><br><span class="line">        if (!isAdmin) &#123;</span><br><span class="line">            connector.setName(String.format(&quot;%s_%s%d&quot;, PROTOCOL_HTTP, hostname, port));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (isAdmin) &#123;</span><br><span class="line">        connector.setName(ADMIN_SERVER_CONNECTOR_NAME);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (!hostname.isEmpty())</span><br><span class="line">        connector.setHost(hostname);</span><br><span class="line"></span><br><span class="line">    connector.setPort(port);</span><br><span class="line"></span><br><span class="line">    return connector;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后调用initializeServer设置静态资源处理器并启动Jetty Server.</p>
+<h2 id="配置Offset-store"><a href="#配置Offset-store" class="headerlink" title="配置Offset store"></a>配置Offset store</h2><p>KafkaOffsetBackingStore使用topic来存储连接器消费的topic的偏移信息，存储偏移信息的topic的名称是以offset.storage.topic为key的配置项，默认为connect-offsets。KafkaOffsetBackingStore会创建Producer用于将偏移信息更新至topic中，同时也会创建Consumer用以获取其他连接器节点更新的偏移位置。KafkaOffsetBackingStore中用于存储最新offset的对象为名为data的HashMap</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private HashMap&lt;ByteBuffer, ByteBuffer&gt; data;</span><br></pre></td></tr></table></figure>
+<p>接收更新偏移位置的回调函数为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private final Callback&lt;ConsumerRecord&lt;byte[], byte[]&gt;&gt; consumedCallback &#x3D; new Callback&lt;ConsumerRecord&lt;byte[], byte[]&gt;&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCompletion(Throwable error, ConsumerRecord&lt;byte[], byte[]&gt; record) &#123;</span><br><span class="line">        ByteBuffer key &#x3D; record.key() !&#x3D; null ? ByteBuffer.wrap(record.key()) : null;</span><br><span class="line">        ByteBuffer value &#x3D; record.value() !&#x3D; null ? ByteBuffer.wrap(record.value()) : null;</span><br><span class="line">        data.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="实例化Worker"><a href="#实例化Worker" class="headerlink" title="实例化Worker"></a>实例化Worker</h2><p>Worker拥有节点上所有的Connector和Task实例，对Connector的创建、启动、停止等操作都是通过Worker来完成的。在Worker的构造函数中没有特别的逻辑，主要是持有一些外部对象的实例。</p>
+<h2 id="配置Status-store"><a href="#配置Status-store" class="headerlink" title="配置Status store"></a>配置Status store</h2><p>KafkaStatusBackingStore的逻辑跟Offset store的逻辑类似，默认存储status的topic名为connect-status, 它维护了Connector、Task和Topic的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected final Table&lt;String, Integer, CacheEntry&lt;TaskStatus&gt;&gt; tasks;</span><br><span class="line">protected final Map&lt;String, CacheEntry&lt;ConnectorStatus&gt;&gt; connectors;</span><br><span class="line">protected final ConcurrentMap&lt;String, ConcurrentMap&lt;String, TopicStatus&gt;&gt; topics;</span><br></pre></td></tr></table></figure>
+<p>回调函数为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Callback&lt;ConsumerRecord&lt;String, byte[]&gt;&gt; readCallback &#x3D; new Callback&lt;ConsumerRecord&lt;String, byte[]&gt;&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCompletion(Throwable error, ConsumerRecord&lt;String, byte[]&gt; record) &#123;</span><br><span class="line">        read(record);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void read(ConsumerRecord&lt;String, byte[]&gt; record) &#123;</span><br><span class="line">    String key &#x3D; record.key();</span><br><span class="line">    if (key.startsWith(CONNECTOR_STATUS_PREFIX)) &#123;</span><br><span class="line">        readConnectorStatus(key, record.value());</span><br><span class="line">    &#125; else if (key.startsWith(TASK_STATUS_PREFIX)) &#123;</span><br><span class="line">        readTaskStatus(key, record.value());</span><br><span class="line">    &#125; else if (key.startsWith(TOPIC_STATUS_PREFIX)) &#123;</span><br><span class="line">        readTopicStatus(key, record.value());</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        log.warn(&quot;Discarding record with invalid key &#123;&#125;&quot;, key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="配置Config-store"><a href="#配置Config-store" class="headerlink" title="配置Config store"></a>配置Config store</h2><p>KafkaConfigBackingStore的逻辑与status store的逻辑类似，默认topic名称为connect-configs，维护Connector和Task配置的变量为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private final Map&lt;String, Integer&gt; connectorTaskCounts &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">private final Map&lt;String, Map&lt;String, String&gt;&gt; connectorConfigs &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">private final Map&lt;ConnectorTaskId, Map&lt;String, String&gt;&gt; taskConfigs &#x3D; new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<p>它的回调函数要稍显复杂，当回调发生时KafkaConfigBackingStore首先会判断消息的内容，然后执行本地缓存的更新, 然后通过调用持有的DistributedHerder的ConfigUpdateListener对象的onXXX方法通知DistributedHerder执行相应的处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">private class ConsumeCallback implements Callback&lt;ConsumerRecord&lt;String, byte[]&gt;&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCompletion(Throwable error, ConsumerRecord&lt;String, byte[]&gt; record) &#123;</span><br><span class="line">        if (error !&#x3D; null) &#123;</span><br><span class="line">            log.error(&quot;Unexpected in consumer callback for KafkaConfigBackingStore: &quot;, error);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        final SchemaAndValue value;</span><br><span class="line">        try &#123;</span><br><span class="line">            value &#x3D; converter.toConnectData(topic, record.value());</span><br><span class="line">        &#125; catch (DataException e) &#123;</span><br><span class="line">            log.error(&quot;Failed to convert config data to Kafka Connect format: &quot;, e);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; Make the recorded offset match the API used for positions in the consumer -- return the offset of the</span><br><span class="line">        &#x2F;&#x2F; *next record*, not the last one consumed.</span><br><span class="line">        offset &#x3D; record.offset() + 1;</span><br><span class="line"></span><br><span class="line">        if (record.key().startsWith(TARGET_STATE_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started &amp;&amp; !removed)</span><br><span class="line">                updateListener.onConnectorTargetStateChange(connectorName);</span><br><span class="line">        &#125; else if (record.key().startsWith(CONNECTOR_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started) &#123;</span><br><span class="line">                if (removed)</span><br><span class="line">                    updateListener.onConnectorConfigRemove(connectorName);</span><br><span class="line">                else</span><br><span class="line">                    updateListener.onConnectorConfigUpdate(connectorName);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else if (record.key().startsWith(TASK_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">        &#125; else if (record.key().startsWith(COMMIT_TASKS_PREFIX)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started)</span><br><span class="line">                updateListener.onTaskConfigUpdate(updatedTasks);</span><br><span class="line">        &#125; else if (record.key().equals(SESSION_KEY_KEY)) &#123;</span><br><span class="line">            ......</span><br><span class="line">            if (started)</span><br><span class="line">                updateListener.onSessionKeyUpdate(KafkaConfigBackingStore.this.sessionKey);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            log.error(&quot;Discarding config update record with invalid key: &#123;&#125;&quot;, record.key());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="初始化Herder"><a href="#初始化Herder" class="headerlink" title="初始化Herder"></a>初始化Herder</h2><p>在DistributedHerder构造函数中，会将前面创建的对象通过直接持有或者间接持有的方式传递给DistributedHerder对象，同时生成ConfigUpdateListener对象传递给configBackingStore，也就是上面提到的config update的逻辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configBackingStore.setUpdateListener(new ConfigUpdateListener());</span><br></pre></td></tr></table></figure>
+<h2 id="启动Connect"><a href="#启动Connect" class="headerlink" title="启动Connect"></a>启动Connect</h2><p>在Connect的构造函数中会将Herder对象和RestServer对象传递进来. 当执行start方法时，首先会执行DistributedHerder的start方法，然后执行RestServer的initializeResources将Herder与RestServer绑定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public void start() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        log.info(&quot;Kafka Connect starting&quot;);</span><br><span class="line">        Exit.addShutdownHook(&quot;connect-shutdown-hook&quot;, shutdownHook);</span><br><span class="line"></span><br><span class="line">        herder.start();</span><br><span class="line">        rest.initializeResources(herder);</span><br><span class="line"></span><br><span class="line">        log.info(&quot;Kafka Connect started&quot;);</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        startLatch.countDown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于DistributedHerder实现了Runnable，在start时通过submit方法将自己作为新的线程实例启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void start() &#123;</span><br><span class="line">    this.herderExecutor.submit(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void run() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        log.info(&quot;Herder starting&quot;);</span><br><span class="line"></span><br><span class="line">        startServices();</span><br><span class="line"></span><br><span class="line">        log.info(&quot;Herder started&quot;);</span><br><span class="line"></span><br><span class="line">        while (!stopping.get()) &#123;</span><br><span class="line">            tick();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        halt();</span><br><span class="line"></span><br><span class="line">        log.info(&quot;Herder stopped&quot;);</span><br><span class="line">        herderMetrics.close();</span><br><span class="line">    &#125; catch (Throwable t) &#123;</span><br><span class="line">        log.error(&quot;Uncaught exception in herder work thread, exiting: &quot;, t);</span><br><span class="line">        Exit.exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在startServices中会依次启动worker，status store，config store, 在worker的start中会启动offset store</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">protected void startServices() &#123;</span><br><span class="line">    this.worker.start();</span><br><span class="line">    this.statusBackingStore.start();</span><br><span class="line">    this.configBackingStore.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在RestServer的initializeResources方法中会通过调用ResourceConfig的register方法将Rest请求路径”/“,”connector”及”connector-plugins”与herder绑定起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resourceConfig.register(new RootResource(herder));</span><br><span class="line">resourceConfig.register(new ConnectorsResource(herder, config));</span><br><span class="line">resourceConfig.register(new ConnectorPluginsResource(herder));</span><br></pre></td></tr></table></figure>
+<p>然后对RestServer日志、跨域等根据配置做一些特定设置，至此Kafka Connect started.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/11/17/SpringBoot-application-integrate-with-CAS-client/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/17/SpringBoot-application-integrate-with-CAS-client/" class="post-title-link" itemprop="url">CAS 学习(二)--SpringBoot整合CAS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-17 18:11:29" itemprop="dateCreated datePublished" datetime="2021-11-17T18:11:29+08:00">2021-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="配置SpringBoot项目"><a href="#配置SpringBoot项目" class="headerlink" title="配置SpringBoot项目"></a>配置SpringBoot项目</h2><ol>
+<li>修改pom文件中添加cas client依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.jasig.cas.client&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;cas-client-support-springboot&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.6.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></li>
+<li>修改application.properties添加如下内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#CAS Server URL</span><br><span class="line">cas.server-url-prefix&#x3D;http:&#x2F;&#x2F;localhost:8443&#x2F;cas</span><br><span class="line">#CAS Server认证登录URL</span><br><span class="line">cas.server-login-url&#x3D;http:&#x2F;&#x2F;localhost:8443&#x2F;cas&#x2F;login</span><br><span class="line">#受保护程序的URL</span><br><span class="line">cas.client-host-url&#x3D;http:&#x2F;&#x2F;localhost:8080</span><br><span class="line">#认证协议</span><br><span class="line">cas.validation-type&#x3D;CAS3</span><br></pre></td></tr></table></figure></li>
+<li>在Springboot启动类中加上注解@EnableCasClient<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@EnableCasClient</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class CasDemoApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(CasDemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>添加测试Controller<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class HelloController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;hello&quot;)</span><br><span class="line">    public String hello()&#123;</span><br><span class="line">        return &quot;Hello CAS!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>启动程序并访问<a href="http://localhost:8080/hello" target="_blank" rel="noopener">http://localhost:8080/hello</a>, 发现浏览器可以正常跳转至cas登录页面, 但是会提示”Application Not Authorized to Use CAS”. 因为服务器默认启用的是https和imaps服务, 所以需要回到<a href="https://blog.zhiqiu.info/2021/03/05/CAS-Server-Overlay-Installation/" target="_blank" rel="noopener">CAS 学习(一)–CAS Server 安装</a>修改服务端.</li>
+</ol>
+<h2 id="配置服务端"><a href="#配置服务端" class="headerlink" title="配置服务端"></a>配置服务端</h2><ol>
+<li><p>修改application.xml内容为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  ssl:</span><br><span class="line">    enabled: false</span><br><span class="line"></span><br><span class="line">cas:</span><br><span class="line">  service-registry:</span><br><span class="line">    core:</span><br><span class="line">      init-from-json: true</span><br></pre></td></tr></table></figure></li>
+<li><p>需要在src/main/resources目录下创建services目录，新建HTTPSandIMAPS-10000001.json文件，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;@class&quot; : &quot;org.apereo.cas.services.RegexRegisteredService&quot;,</span><br><span class="line">  &quot;serviceId&quot; : &quot;^(https|http|imaps):&#x2F;&#x2F;.*&quot;,</span><br><span class="line">  &quot;name&quot; : &quot;HTTPS and IMAPS&quot;,</span><br><span class="line">  &quot;id&quot; : 10000001,</span><br><span class="line">  &quot;description&quot; : &quot;This service definition authorizes all application urls that support HTTPS and IMAPS protocols.&quot;,</span><br><span class="line">  &quot;evaluationOrder&quot; : 10000</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启CAS Server并重新访问<a href="http://localhost:8080/hello" target="_blank" rel="noopener">http://localhost:8080/hello</a>， 发现任然提示”Application Not Authorized to Use CAS”错误信息. 此时需要调试程序查找原因</p>
+</li>
+<li><p>下载CAS Server代码进行远程调试, 端口号为5005, 发现CasServiceRegistryInitializationConfiguration.java中getServiceRegistryInitializerServices方法在验证资源文件时使用的ResourceUtils.doesResourceExist存在bug, 由于registry为Json时, location为services目录, 所以res.contentLength&gt;0恒为false, 导致用户自定义的json文件永远不会被解压出来使用.</p>
+</li>
+</ol>
+<p>CasServiceRegistryInitializationConfiguration.java中检查资源文件调用的是ResourceUtils.doesResourceExist</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private Resource getServiceRegistryInitializerServicesDirectoryResource() &#123;</span><br><span class="line">    val registry &#x3D; casProperties.getServiceRegistry().getJson();</span><br><span class="line">    if (ResourceUtils.doesResourceExist(registry.getLocation())) &#123;</span><br><span class="line">        LOGGER.debug(&quot;Using JSON service registry location [&#123;&#125;] for embedded service definitions&quot;, registry.getLocation());</span><br><span class="line">        return registry.getLocation();</span><br><span class="line">    &#125;</span><br><span class="line">    val parent &#x3D; new File(FileUtils.getTempDirectory(), &quot;cas&quot;);</span><br><span class="line">    if (!parent.mkdirs()) &#123;</span><br><span class="line">        LOGGER.warn(&quot;Unable to create folder [&#123;&#125;]&quot;, parent);</span><br><span class="line">    &#125;</span><br><span class="line">    val resources &#x3D; ResourcePatternUtils.getResourcePatternResolver(applicationContext)</span><br><span class="line">        .getResources(&quot;classpath*:&#x2F;services&#x2F;*.json&quot;);</span><br><span class="line">    Arrays.stream(resources)</span><br><span class="line">        .forEach(resource -&gt; ResourceUtils.exportClasspathResourceToFile(parent, resource));</span><br><span class="line">    LOGGER.debug(&quot;Using service registry location [&#123;&#125;] for embedded service definitions&quot;, parent);</span><br><span class="line">    return new FileSystemResource(parent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ResourceUtils.java中res.contentLength() &gt; 0恒为false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static boolean doesResourceExist(final Resource res) &#123;</span><br><span class="line">    if (res &#x3D;&#x3D; null) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    try &#123;</span><br><span class="line">        IOUtils.read(res.getInputStream(), new byte[1]);</span><br><span class="line">        return res.contentLength() &gt; 0;</span><br><span class="line">    &#125; catch (final FileNotFoundException e) &#123;</span><br><span class="line">        LOGGER.trace(e.getMessage());</span><br><span class="line">        return false;</span><br><span class="line">    &#125; catch (final Exception e) &#123;</span><br><span class="line">        LOGGER.trace(e.getMessage(), e);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>修复bug后重新启动CAS Server并访问<a href="http://localhost:8080/hello" target="_blank" rel="noopener">http://localhost:8080/hello</a>,久违的登录页面终于出现了，输入用户名密码后能够成功跳转并输出Hello CAS!</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jilichao.github.io/2021/03/05/CAS-Server-Overlay-Installation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhiQiu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知秋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/05/CAS-Server-Overlay-Installation/" class="post-title-link" itemprop="url">CAS 学习(一)--CAS Server 安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-05 16:03:48" itemprop="dateCreated datePublished" datetime="2021-03-05T16:03:48+08:00">2021-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-21 13:05:52" itemprop="dateModified" datetime="2023-11-21T13:05:52+08:00">2023-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文参考<a href="https://apereo.github.io/cas/6.4.x/installation/WAR-Overlay-Installation.html" target="_blank" rel="noopener">CAS官方文档</a>，版本号为6.4.x</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>CAS 使用overlay template方式安装。根据官方文档的描述，overlay template有以下几点好处</p>
+<ol>
+<li>无需下载源代码重头开始开始编译。</li>
+<li>升级版本极其简单方便，只需要调整编译脚本依赖新的CAS版本。</li>
+<li>无需管理整个CAS的源代码，只需要处理本地开发的代码逻辑，从而简化代码维护的工作。</li>
+<li>再次，由于只需要关注本地代码逻辑的变更，而不用管理整个CAS的源码，从而减少了跟踪代码变更的工作量。</li>
+</ol>
+<p>首先需要checkout CAS overlay template项目，此项目相当于CAS部署的模板，后续的配置修改开发工作均可基于本项目进行。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先需要checkout CAS overlay template项目，后续的开发配置工作均可基于本项目进行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;apereo&#x2F;cas-overlay-template.git</span><br><span class="line">cd cas-overlay-template &amp;&amp; git checkout -b 6.4 origin&#x2F;6.4</span><br></pre></td></tr></table></figure>
+<p>修改src/main/resources下application.yml，添加以下内容禁用SSL认证，否则需要生成jks等秘钥文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  ssl:</span><br><span class="line">    enabled: false</span><br></pre></td></tr></table></figure>
+<p>执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;gradlew debug</span><br></pre></td></tr></table></figure>
+<p>下载依赖完成编译后会输出以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Listening for transport dt_socket at address: 5005</span><br><span class="line">...................................</span><br><span class="line">2021-10-19 15:33:32,114 INFO [org.apereo.cas.web.CasWebApplication] - &lt;Ready to process requests @ [2021-10-19T07:33:32.113Z]&gt;</span><br></pre></td></tr></table></figure>
+<p>通过浏览器访问<a href="http://localhost:8443/cas/login" target="_blank" rel="noopener">http://localhost:8443/cas/login</a>，输入用户名casuser及密码Mellon登录成功。</p>
 
       
     </div>
@@ -360,7 +1001,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -428,14 +1069,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -467,7 +1108,7 @@
 <div class="copyright">
   
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
